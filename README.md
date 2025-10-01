@@ -1,21 +1,31 @@
-# Data-Compilation-Model
+# Species Trait Data Compilation
 
-## Project Overview
-This project automates the extraction, compilation, and validation of biological and environmental data using large language models (LLMs) and open-source APIs.
+This project automates the retrieval and compilation of species-specific biological trait data by integrating biodiversity APIs with large language models. It is designed to scale from focused case studies to generalized, cross-species analyses.
 
-It consists of two main components:
-- **Frog-Specific Data Pipeline**: Focuses on amphibian data retrieval from **AmphibiaWeb**, **IUCN Red List**, and the **Climate Change Knowledge Portal** to extract species-level traits like **snout-vent length (SVL)**, **egg diameter**, **reproductive mode**, and associated **climate and altitude data**.
-- **Generic Data Retrieval Framework**: A flexible, scalable system that supports querying **arbitrary species** using the IUCN Red List and climate APIs, allowing trait-specific extraction (e.g., **diet**, **habitat**, **average surface temperature**) using configurable prompt templates.
+---
 
-## Features
-- **Frog-Specific Data Retrieval**: Extracts morphological, reproductive, and environmental data from AmphibiaWeb and IUCN APIs.
-- **Machine Learning Model Extraction**: Uses OpenAI’s GPT-4o to extract structured values from unstructured text.
-- **IUCN Red List API Integration**: Retrieves taxonomic and distribution information for any species.
-- **Climate Change Knowledge Portal API Integration**: Collects temperature and rainfall data based on species range.
-- **Generic Retrieval Framework**: Allows trait extraction for any species and feature, supporting batch processing and prompt customization.
-- **Excel Output Generation**: Outputs processed and validated results to structured Excel files for downstream use.
+## 1. Frog Analysis
 
-## Required Dependencies
-- At least Python 3
-- Git
-- Required libraries: `pandas`, `openpyxl`, `requests`, `bs4`, `dotenv`, `openai`, `selenium`
+The first phase of this project demonstrates a deep dive into amphibians (frogs) as a proof of concept.  
+- Uses multiple APIs to collect ecological and biological information:  
+  - AmphibiaWeb: morphology and reproductive traits (snout–vent length, clutch size, egg diameter)  
+  - IUCN Red List: elevation ranges and habitat categories  
+  - World Bank CCKP: temperature and rainfall statistics  
+- Automates retrieval of structured (API) and semi-structured (XML parsed via GPT-4o) data  
+- Compiles outputs into a clean CSV/Excel dataset with traits like morphology, reproduction, climate, and altitude  
+
+---
+
+## 2. Generalized Data Pipeline
+
+The system then expands into a general-purpose trait extraction pipeline.  
+- Uses Europe PMC / PubMed Central (PMC) to query scientific literature  
+- Retrieves PDFs, parses them, and applies LLM-based extraction prompts to pull out traits such as diet, size, habitat, or environmental associations  
+- Works for any list of species and any set of traits, driven by an Excel file and trait description mapping  
+- Provides a UI for easy use, supporting batch processing across taxa  
+
+---
+
+## How to Use
+
+
