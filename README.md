@@ -28,4 +28,19 @@ The system then expands into a general-purpose trait extraction pipeline.
 
 ## How to Use
 
+1. Run the GUI script:
+
+   ```bash
+   python3 Data-Compilation-Model/02_generic_data_compilation/scripts/gui.py
+   ```
+
+2. In the popup window:
+   - Upload your Excel file: first column = species, remaining columns = traits.
+   - Upload your trait descriptions text file: UTF-16 encoded; each line in the format **trait: description**.
+
+3. Start extraction:
+   - Click **Start Data Extraction**.
+   - The system will query APIs, fetch papers, and extract trait data.
+   - Results will be saved to:
+   Data-Compilation-Model/02_generic_data_compilation/results/
 
