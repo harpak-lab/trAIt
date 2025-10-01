@@ -15,7 +15,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 BASE_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 PDF_URL = "https://europepmc.org/backend/ptpmcrender.fcgi"
 
-# --- Europe PMC search (metadata only) ---
 def search_papers(query: str, max_results: int = 20):
     """Search Europe PMC and return a list of PMCIDs (metadata only)."""
     search_url = f"{BASE_URL}/search"
@@ -35,7 +34,6 @@ def search_papers(query: str, max_results: int = 20):
     return pmcids
 
 
-# --- Fetch single PDF lazily ---
 def fetch_pdf(pmcid: str):
     """Download and parse a single PDF by PMCID."""
     pdf_url = f"{PDF_URL}?accid={pmcid}&blobtype=pdf"
@@ -80,22 +78,23 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     {truncated_text}
     """
 
-    print(
-    f"""
-    Extract information about the species {species} from the following research paper.
-    Focus specifically on the trait: {trait}{desc_part}
+    # debugging purposes
+    # print(
+    # f"""
+    # Extract information about the species {species} from the following research paper.
+    # Focus specifically on the trait: {trait}{desc_part}
 
-    Return only the key fact(s), in the fewest possible words.
-    Do not write full sentences, explanations, or background.
-    Output should be just the essential data points (e.g., "10 cm", "desert habitats").
-    If no information is found, respond with "N/A".
+    # Return only the key fact(s), in the fewest possible words.
+    # Do not write full sentences, explanations, or background.
+    # Output should be just the essential data points (e.g., "10 cm", "desert habitats").
+    # If no information is found, respond with "N/A".
 
-    Format your response EXACTLY as:
-    {trait}: [short fact(s)]
-    """
-    )
+    # Format your response EXACTLY as:
+    # {trait}: [short fact(s)]
+    # """
+    # )
 
-    for attempt in range(5):  # up to 5 tries
+    for attempt in range(5): # up to 5 tries
         try:
             response = client.chat.completions.create(
                 model="gpt-5-nano",
@@ -110,13 +109,13 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
             return result
 
         except RateLimitError as e:
-            wait_time = 60 * (attempt + 1)  # backoff: 60s, 120s, etc.
+            wait_time = 60 * (attempt + 1) # backoff: 60s, 120s, etc.
             print(f"      Rate limit hit (attempt {attempt+1}), waiting {wait_time}s...")
             time.sleep(wait_time)
 
         except Exception as e:
             print(f"      Unexpected error: {e}")
-            break  # don’t retry unknown errors
+            break # don’t retry unknown errors
 
     return f"{trait}: N/A"
 
@@ -137,17 +136,8 @@ def parse_gpt_output(gpt_output, trait):
     return "N/A"
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
-    """
-    Main helper method to process species and traits lists through the pipeline.
-
-    Args:
-        species_list: List of species names to process
-        traits_list: List of traits to search for
-        output_file: Name of the output Excel file
-        trait_descriptions: Optional dict mapping lowercase trait -> description
-    """
-
-    # Create a DataFrame with species and traits
+    """Main helper method to process species and traits lists through the pipeline."""
+    # create a DataFrame with species and traits
     data = []
     for species in species_list:
         row = [species] + ["N/A"] * len(traits_list)
@@ -156,11 +146,11 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     df = pd.DataFrame(data, columns=["Species"] + traits_list)
     results = df.copy()
 
-    # Ensure trait columns are strings to avoid dtype warnings
+    # ensure trait columns are strings to avoid dtype warnings
     for trait in traits_list:
         results[trait] = results[trait].astype(str)
 
-    # Loop through each species and trait
+    # loop through each species and trait
     for idx, row in df.iterrows():
         species = row["Species"]
         print(f"\nProcessing {species}...")
@@ -168,7 +158,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
         for trait in traits_list:
             print(f"  Processing trait: {trait}")
 
-            # Get trait description if provided (case-insensitive key)
+            # get trait description if provided (case-insensitive key)
             trait_desc = ""
             if trait_descriptions:
                 trait_desc = trait_descriptions.get(trait, "")
@@ -206,7 +196,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 results.at[idx, trait] = "N/A"
                 print(f"    No information found for {trait} after trying {min(5, len(pmcids))} papers")
 
-    # Save results
+    # save results
     results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
     os.makedirs(results_dir, exist_ok=True)
     output_path = os.path.join(results_dir, output_file)

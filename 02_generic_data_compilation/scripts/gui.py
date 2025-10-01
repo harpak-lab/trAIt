@@ -34,11 +34,11 @@ class SpeciesTraitsApp(QWidget):
         self.setWindowTitle("Species & Traits Analysis")
         self.setGeometry(200, 200, 500, 200)
 
-        # File paths
+        # file paths
         self.excel_path = None
         self.traits_path = None
 
-        # Layout
+        # layout
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.show_input_form()
@@ -94,22 +94,22 @@ class SpeciesTraitsApp(QWidget):
             QMessageBox.critical(self, "Error", "Please select both Excel and Trait Description files.")
             return
 
-        # --- Parse Excel file ---
+        # parse excel file
         df = pd.read_excel(self.excel_path)
         species_list = df.iloc[:, 0].dropna().astype(str).tolist()  # first col = species
         traits_list = df.columns[1:].astype(str).tolist()  # rest = traits
 
-        # --- Parse Trait description file ---
+        # parse trait description file
         trait_descriptions = {}
         # with open(self.traits_path, "r") as f:
         with open(self.traits_path, "r", encoding="utf-16") as f:
             for line in f:
                 if ":" in line:
                     trait, desc = line.split(":", 1)
-                    clean_trait = trait.strip().lower().lstrip("\ufeff")  # remove BOM if present
+                    clean_trait = trait.strip().lower().lstrip("\ufeff") # remove BOM if exists
                     trait_descriptions[clean_trait] = desc.strip()
 
-        # Normalize traits and map descriptions (case-insensitive)
+        # normalize traits and map descriptions (case-insensitive)
         normalized_traits = []
         mapped_descriptions = {}
         for t in traits_list:
@@ -119,10 +119,10 @@ class SpeciesTraitsApp(QWidget):
 
         file_name = "output_results.xlsx"
 
-        # Switch to loading
+        # switch to loading
         self.show_loading()
 
-        # Start worker
+        # start worker
         self.worker = ExtractionWorker(species_list, normalized_traits, mapped_descriptions, file_name)
         self.worker.finished.connect(self.on_extraction_finished)
         self.worker.start()
