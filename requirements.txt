@@ -1,0 +1,8 @@
+pandas
+PyQt5
+requests
+openai
+python-dotenv
+pdfplumber
+tiktoken
+openpyxl
