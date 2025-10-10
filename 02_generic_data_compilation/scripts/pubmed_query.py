@@ -79,20 +79,20 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     """
 
     # debugging purposes
-    # print(
-    # f"""
-    # Extract information about the species {species} from the following research paper.
-    # Focus specifically on the trait: {trait}{desc_part}
+    print(
+    f"""
+    Extract information about the species {species} from the following research paper.
+    Focus specifically on the trait: {trait}{desc_part}
 
-    # Return only the key fact(s), in the fewest possible words.
-    # Do not write full sentences, explanations, or background.
-    # Output should be just the essential data points (e.g., "10 cm", "desert habitats").
-    # If no information is found, respond with "N/A".
+    Return only the key fact(s), in the fewest possible words.
+    Do not write full sentences, explanations, or background.
+    Output should be just the essential data points (e.g., "10 cm", "desert habitats").
+    If no information is found, respond with "N/A".
 
-    # Format your response EXACTLY as:
-    # {trait}: [short fact(s)]
-    # """
-    # )
+    Format your response EXACTLY as:
+    {trait}: [short fact(s)]
+    """
+    )
 
     for attempt in range(5): # up to 5 tries
         try:
@@ -137,6 +137,8 @@ def parse_gpt_output(gpt_output, trait):
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
     """Main helper method to process species and traits lists through the pipeline."""
+    start_time = time.time()
+
     # create a DataFrame with species and traits
     data = []
     for species in species_list:
@@ -168,7 +170,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
 
             if not pmcids:
                 print(f"    No papers found for {species} {trait}")
-                results.at[idx, trait] = "N/A"
+                results.at[idx, trait] = ""
                 continue
 
             found_info = False
@@ -182,7 +184,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     gpt_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
                     value = parse_gpt_output(gpt_output, trait)
 
-                    if value != "N/A":
+                    if value != "N/A" and value != "[N/A]":
                         results.at[idx, trait] = value
                         found_info = True
                         print(f"    Found information for {trait} in paper {paper_idx + 1}")
@@ -193,7 +195,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     print(f"    GPT error for {species} {trait} paper {paper_idx + 1}: {e}")
 
             if not found_info:
-                results.at[idx, trait] = "N/A"
+                results.at[idx, trait] = ""
                 print(f"    No information found for {trait} after trying {min(5, len(pmcids))} papers")
 
     # save results
@@ -202,5 +204,13 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     output_path = os.path.join(results_dir, output_file)
     results.to_excel(output_path, index=False)
     print(f"\nResults written to {output_file}")
+
+    # timing
+    end_time = time.time()
+    total_time = end_time - start_time
+    hours, rem = divmod(total_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print(f"\nTotal processing time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
+
     return results
 
