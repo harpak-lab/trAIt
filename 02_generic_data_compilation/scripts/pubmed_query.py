@@ -291,7 +291,6 @@ def parse_gpt_output(gpt_output, trait):
 
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
-    """Two-phase pipeline: first species-level, then trait-specific fallback."""
     start_time = time.time()
     data = [[species] + ["N/A"] * len(traits_list) for species in species_list]
     results = pd.DataFrame(data, columns=["Species"] + traits_list)
@@ -300,7 +299,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
         species = row["Species"]
         print(f"\n=== Processing {species} ===")
 
-        # Phase 1: Species-only search
         print("  Phase 1: Searching species-only papers...")
         pmcids = search_papers(species, max_results=20)
         if not pmcids:
@@ -312,20 +310,17 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 if not paper_text:
                     continue
 
-                # Build list of traits still missing
+                # check traits that are still missing
                 remaining_traits = [t for t in traits_list if results.at[idx, t] in ("", "N/A", "[N/A]")]
                 if not remaining_traits:
                     print("    All traits already filled; skipping remaining papers.")
                     break
 
-                # Ask GPT only for missing traits
                 gpt_output = extract_multiple_traits_from_paper(species, remaining_traits, trait_descriptions, paper_text)
 
-                # gpt_output = extract_multiple_traits_from_paper(species, traits_list, trait_descriptions, paper_text)
                 if not gpt_output:
                     continue
 
-                # Parse GPT output and fill results where missing
                 for trait in traits_list:
                     current_val = results.at[idx, trait]
                     if current_val in ("", "N/A", "[N/A]"):
@@ -334,12 +329,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                             results.at[idx, trait] = value
                             print(f"      Found {trait}: {value}")
 
-                # Stop if all traits filled
+                # check if all traits filled
                 if all(results.at[idx, t] not in ("", "N/A", "[N/A]") for t in traits_list):
                     print("    All traits found; skipping remaining papers.")
                     break
 
-        # Phase 2: Trait-specific fallback
+        # trait-specific fallback
         print("  Phase 2: Trait-specific fallback...")
         for trait in traits_list:
             if results.at[idx, trait] in ("", "N/A", "[N/A]"):
@@ -372,21 +367,18 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     results.at[idx, trait] = ""
                     print(f"      No information found for {trait}")
         
-        # Save results for the species
         results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
         os.makedirs(results_dir, exist_ok=True)
         output_path = os.path.join(results_dir, output_file)
         results.to_excel(output_path, index=False)
         print(f"\nProgress saved after {species}")
 
-    # Save results at the end
     results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
     os.makedirs(results_dir, exist_ok=True)
     output_path = os.path.join(results_dir, output_file)
     results.to_excel(output_path, index=False)
     print(f"\nResults written to {output_file}")
 
-    # Timing
     end_time = time.time()
     total_time = end_time - start_time
     hours, rem = divmod(total_time, 3600)
