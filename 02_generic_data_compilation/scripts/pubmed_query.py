@@ -291,6 +291,13 @@ def parse_gpt_output(gpt_output, trait):
 
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
+    print(species_list)
+    print(traits_list)
+
+    # to test the csv reading in stuff -- not tested yet but implementation done!
+
+    return 
+
     start_time = time.time()
     data = [[species] + ["N/A"] * len(traits_list) for species in species_list]
     results = pd.DataFrame(data, columns=["Species"] + traits_list)
