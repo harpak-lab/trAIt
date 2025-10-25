@@ -107,7 +107,7 @@ class SpeciesTraitsApp(QWidget):
         and the remaining columns as <b>traits</b>.</p>
         <p>2. Prepare a text file (.txt, UTF-8 encoded) listing each trait followed by a colon and its description.</p>
         <p>3. Upload both files under the <b>Upload</b> tab and click <b>Start Data Extraction</b>.</p>
-        <p>The processed Excel file will be saved as <b>output_results.xlsx</b> in your working directory.</p>
+        <p>The processed CSV file will be saved as <b>output_results.csv</b> in a results directory.</p>
         """)
         instructions.setWordWrap(True)
         layout.addWidget(instructions)
@@ -193,7 +193,7 @@ class SpeciesTraitsApp(QWidget):
             normalized_traits.append(t)
             mapped_descriptions[t] = trait_descriptions.get(t_lower, "")
 
-        file_name = "output_results.xlsx"
+        file_name = "output_results.csv"
 
         # switch to loading
         self.show_loading()

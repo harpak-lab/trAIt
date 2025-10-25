@@ -180,6 +180,17 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     """Main helper method to process species and traits lists through the pipeline."""
     start_time = time.time()
 
+    results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
+    os.makedirs(results_dir, exist_ok=True)
+    output_path = os.path.join(results_dir, output_file)
+
+    all_papers_log = os.path.join(results_dir, "all_papers.txt")
+    successful_papers_log = os.path.join(results_dir, "successful_papers.txt")
+
+    # clear previous logs if they exist
+    open(all_papers_log, "w").close()
+    open(successful_papers_log, "w").close()
+
     # create a DataFrame with species and traits
     data = []
     for species in species_list:
@@ -222,12 +233,19 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 if not paper_text:
                     continue
 
+                # log every paper where full text was successfully retrieved
+                with open(all_papers_log, "a") as f:
+                    f.write(f"{species}\t{trait}\t{pmcid}\n")
+
                 try:
                     gpt_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
                     value = parse_gpt_output(gpt_output, trait)
                     print(f"      Extracted value from paper {paper_idx + 1}: {value}")
 
                     if value not in ("N/A", "[N/A]", ""):
+                        # log successful papers (where GPT extracted a valid answer)
+                        with open(successful_papers_log, "a") as f:
+                            f.write(f"{species}\t{trait}\t{pmcid}\n")
                         answers.append(value)
                         if len(answers) >= 3:
                             print("      Collected 3 valid answers; stopping paper scan.")
@@ -245,12 +263,10 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             else:
                 results.at[idx, trait] = ""
                 print(f"    No valid information found for {trait} after {len(pmcids)} papers")
+            
+        # save results
+        results.to_csv(output_path, index=False)
 
-    # save results
-    results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
-    os.makedirs(results_dir, exist_ok=True)
-    output_path = os.path.join(results_dir, output_file)
-    results.to_excel(output_path, index=False)
     print(f"\nResults written to {output_file}")
 
     # timing
