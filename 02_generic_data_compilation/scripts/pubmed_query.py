@@ -217,7 +217,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             if trait_descriptions:
                 trait_desc = trait_descriptions.get(trait, "")
 
-            query = f"{species} AND {trait}"
+            query = f"wild {species} AND {trait}"
             pmcids = search_papers(query, max_results=20)
 
             if not pmcids:
