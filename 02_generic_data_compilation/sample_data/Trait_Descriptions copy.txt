@@ -1,0 +1,2 @@
+average life expectancy: How old individuals in a species are on average when they die. This should be a number in years. 
+reproductive rate: Number of offspring on average per year for a single individual. This should be a number. If there is a range, take the average. 

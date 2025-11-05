@@ -1,218 +1,30 @@
-Microtus ochrogaster	Mating System	PMC12229526
-Microtus ochrogaster	Mating System	PMC12290110
-Microtus ochrogaster	Mating System	PMC11128605
-Microtus ochrogaster	Social Dominance Hierarchy	PMC4349411
-Microtus ochrogaster	Territoriality (males)	PMC12229526
-Microtus ochrogaster	Territoriality (males)	PMC10295201
-Microtus ochrogaster	Territoriality (males)	PMC6894606
-Microtus ochrogaster	Territoriality (females)	PMC8076734
-Microtus ochrogaster	Group Size During Reproduction	PMC11933278
-Microtus ochrogaster	Group Size During Reproduction	PMC12013795
-Microtus ochrogaster	Group Size During Reproduction	PMC11938270
-Microtus ochrogaster	Group Size Outside of Reproduction	PMC11933278
-Microtus ochrogaster	Group Property	PMC12469717
-Microtus ochrogaster	Group Property	PMC11286410
-Microtus ochrogaster	Group Property	PMC12428894
-Microtus ochrogaster	Age at Maturity	PMC11286801
-Microtus ochrogaster	Age at Maturity	PMC8578440
-Microtus ochrogaster	Age at Maturity	PMC5131865
-Microtus ochrogaster	# offspring/reproductive bout	PMC3164816
-Microtus ochrogaster	Migratory behavior	PMC10613685
-Microtus ochrogaster	Migratory behavior	PMC5647275
-Microtus ochrogaster	Activity Pattern	PMC10961198
-Microtus ochrogaster	Activity Pattern	PMC11374920
-Microtus ochrogaster	Habitat Complexity	PMC6894606
-Microtus ochrogaster	Habitat Complexity	PMC9514214
-Microtus ochrogaster	Habitat Complexity	PMC4722349
-Microtus pennsylvanicus	Mating System	PMC12290110
-Microtus pennsylvanicus	Mating System	PMC11269223
-Microtus pennsylvanicus	Mating System	PMC8923817
-Microtus pennsylvanicus	Social Dominance Hierarchy	PMC4722349
-Microtus pennsylvanicus	Territoriality (males)	PMC11502148
-Microtus pennsylvanicus	Territoriality (males)	PMC6433777
-Microtus pennsylvanicus	Territoriality (males)	PMC6347671
-Microtus pennsylvanicus	Territoriality (females)	PMC8940285
-Microtus pennsylvanicus	Territoriality (females)	PMC9311412
-Microtus pennsylvanicus	Territoriality (females)	PMC6433777
-Microtus pennsylvanicus	Group Size During Reproduction	PMC11269223
-Microtus pennsylvanicus	Group Size Outside of Reproduction	PMC6371784
-Microtus pennsylvanicus	Age at Maturity	PMC3988216
-Microtus pennsylvanicus	Age at Maturity	PMC2895564
-Microtus pennsylvanicus	Migratory behavior	PMC9113094
-Microtus pennsylvanicus	Activity Pattern	PMC11145901
-Microtus pennsylvanicus	Habitat Complexity	PMC6449735
-Mus musculus	Mating System	PMC11959681
-Mus musculus	Social Dominance Hierarchy	PMC11933688
-Mus musculus	Social Dominance Hierarchy	PMC11761145
-Mus musculus	Social Dominance Hierarchy	PMC11577026
-Mus musculus	Territoriality (males)	PMC12134446
-Mus musculus	Territoriality (males)	PMC11577026
-Mus musculus	Territoriality (males)	PMC10865716
-Mus musculus	Territoriality (females)	PMC10949005
-Mus musculus	Territoriality (females)	PMC10865716
-Mus musculus	Territoriality (females)	PMC10950460
-Mus musculus	Group Size During Reproduction	PMC12336854
-Mus musculus	Group Size During Reproduction	PMC11978780
-Mus musculus	Group Size During Reproduction	PMC11591041
-Mus musculus	Group Size Outside of Reproduction	PMC11591041
-Mus musculus	Group Size Outside of Reproduction	PMC12212983
-Mus musculus	Group Size Outside of Reproduction	PMC12173492
-Mus musculus	Group Property	PMC12384402
-Mus musculus	Age at Maturity	PMC12505160
-Mus musculus	Age at Maturity	PMC11431519
-Mus musculus	# offspring/reproductive bout	PMC9481530
-Mus musculus	# offspring/reproductive bout	PMC12532101
-Mus musculus	Migratory behavior	PMC12170898
-Mus musculus	Habitat Complexity	PMC12248777
-Mus musculus	Habitat Complexity	PMC12308524
-Mus musculus	Habitat Complexity	PMC11441244
-Rattus norvegicus	Mating System	PMC12184451
-Rattus norvegicus	Mating System	PMC12214433
-Rattus norvegicus	Mating System	PMC12373797
-Rattus norvegicus	Social Dominance Hierarchy	PMC8319288
-Rattus norvegicus	Social Dominance Hierarchy	PMC10527394
-Rattus norvegicus	Social Dominance Hierarchy	PMC10695365
-Rattus norvegicus	Territoriality (males)	PMC7819557
-Rattus norvegicus	Territoriality (females)	PMC7819557
-Rattus norvegicus	Group Size During Reproduction	PMC12268271
-Rattus norvegicus	Group Size Outside of Reproduction	PMC12080833
-Rattus norvegicus	Group Property	PMC11437415
-Rattus norvegicus	Age at Maturity	PMC12047771
-Rattus norvegicus	Age at Maturity	PMC12205227
-Rattus norvegicus	Migratory behavior	PMC11075221
-Rattus norvegicus	Activity Pattern	PMC12047771
-Rattus norvegicus	Activity Pattern	PMC12235352
-Rattus norvegicus	Habitat Complexity	PMC12466521
-Rattus norvegicus	Habitat Complexity	PMC12332118
-Rattus norvegicus	Habitat Complexity	PMC11578634
-Cavia porcellus	Mating System	PMC12354967
-Cavia porcellus	Mating System	PMC10376535
-Cavia porcellus	Social Dominance Hierarchy	PMC6928119
-Cavia porcellus	Social Dominance Hierarchy	PMC7278718
-Cavia porcellus	Social Dominance Hierarchy	PMC5034672
-Cavia porcellus	Territoriality (males)	PMC3277427
-Cavia porcellus	Group Size During Reproduction	PMC12056416
-Cavia porcellus	Group Size During Reproduction	PMC11494921
-Cavia porcellus	Group Size During Reproduction	PMC10583357
-Cavia porcellus	Group Size Outside of Reproduction	PMC9853291
-Cavia porcellus	Group Size Outside of Reproduction	PMC7278718
-Cavia porcellus	Group Size Outside of Reproduction	PMC7190603
-Cavia porcellus	Age at Maturity	PMC12056416
-Cavia porcellus	Age at Maturity	PMC11244642
-Cavia porcellus	Age at Maturity	PMC11022948
-Cavia porcellus	# offspring/reproductive bout	PMC2546386
-Cavia porcellus	Habitat Complexity	PMC11784782
-Fukomys damarensis	Mating System	PMC11479762
-Fukomys damarensis	Mating System	PMC11521613
-Fukomys damarensis	Mating System	PMC11645877
-Fukomys damarensis	Social Dominance Hierarchy	PMC7531346
-Fukomys damarensis	Social Dominance Hierarchy	PMC7265712
-Fukomys damarensis	Social Dominance Hierarchy	PMC6789728
-Fukomys damarensis	Territoriality (males)	PMC10550246
-Fukomys damarensis	Territoriality (males)	PMC9177142
-Fukomys damarensis	Group Size During Reproduction	PMC11479762
-Fukomys damarensis	Group Size During Reproduction	PMC11521613
-Fukomys damarensis	Group Size During Reproduction	PMC10291439
-Fukomys damarensis	Group Size Outside of Reproduction	PMC11479762
-Fukomys damarensis	Group Size Outside of Reproduction	PMC9657576
-Fukomys damarensis	Group Size Outside of Reproduction	PMC10355180
-Fukomys damarensis	Group Property	PMC11336006
-Fukomys damarensis	Group Property	PMC9951763
-Fukomys damarensis	Group Property	PMC9913580
-Fukomys damarensis	Age at Maturity	PMC11336006
-Fukomys damarensis	Age at Maturity	PMC11645877
-Fukomys damarensis	Age at Maturity	PMC6015866
-Fukomys damarensis	Migratory behavior	PMC3712434
-Fukomys damarensis	Activity Pattern	PMC10291439
-Fukomys damarensis	Activity Pattern	PMC9657576
-Fukomys damarensis	Activity Pattern	PMC8965407
-Fukomys damarensis	Habitat Complexity	PMC11645877
-Fukomys damarensis	Habitat Complexity	PMC9913580
-Fukomys damarensis	Habitat Complexity	PMC9912604
-Pan troglodytes	Mating System	PMC12187410
-Pan troglodytes	Mating System	PMC12058909
-Pan troglodytes	Mating System	PMC11561109
-Pan troglodytes	Social Dominance Hierarchy	PMC11933235
-Pan troglodytes	Social Dominance Hierarchy	PMC11598780
-Pan troglodytes	Territoriality (males)	PMC8977654
-Pan troglodytes	Territoriality (males)	PMC10651548
-Pan troglodytes	Territoriality (males)	PMC9351493
-Pan troglodytes	Territoriality (females)	PMC8977654
-Pan troglodytes	Territoriality (females)	PMC9351493
-Pan troglodytes	Group Size During Reproduction	PMC12514012
-Pan troglodytes	Group Size During Reproduction	PMC12187410
-Pan troglodytes	Group Size During Reproduction	PMC12419670
-Pan troglodytes	Group Size Outside of Reproduction	PMC12514012
-Pan troglodytes	Group Size Outside of Reproduction	PMC12187410
-Pan troglodytes	Group Size Outside of Reproduction	PMC12419670
-Pan troglodytes	Group Property	PMC12131256
-Pan troglodytes	Group Property	PMC11598780
-Pan troglodytes	Age at Maturity	PMC11799747
-Pan troglodytes	Age at Maturity	PMC12269575
-Pan troglodytes	Age at Maturity	PMC12219375
-Pan troglodytes	# offspring/reproductive bout	PMC9352031
-Pan troglodytes	Migratory behavior	PMC12044366
-Pan troglodytes	Habitat Complexity	PMC12304783
-Pan troglodytes	Habitat Complexity	PMC11872189
-Pan troglodytes	Habitat Complexity	PMC12043769
-Homo sapiens	Mating System	PMC12352738
-Homo sapiens	Mating System	PMC11956882
-Homo sapiens	Mating System	PMC12412726
-Homo sapiens	Social Dominance Hierarchy	PMC12417227
-Homo sapiens	Social Dominance Hierarchy	PMC11317448
-Homo sapiens	Social Dominance Hierarchy	PMC11600381
-Homo sapiens	Territoriality (males)	PMC9869453
-Homo sapiens	Territoriality (males)	PMC9457541
-Homo sapiens	Territoriality (males)	PMC7907251
-Homo sapiens	Territoriality (females)	PMC4920296
-Homo sapiens	Territoriality (females)	PMC7293156
-Homo sapiens	Group Size During Reproduction	PMC12352738
-Homo sapiens	Group Size During Reproduction	PMC12179681
-Homo sapiens	Group Size Outside of Reproduction	PMC12417227
-Homo sapiens	Group Size Outside of Reproduction	PMC11745029
-Homo sapiens	Group Size Outside of Reproduction	PMC12543167
-Homo sapiens	Group Property	PMC12388461
-Homo sapiens	Group Property	PMC12467941
-Homo sapiens	Group Property	PMC12467718
-Homo sapiens	# offspring/reproductive bout	PMC5875731
-Homo sapiens	Migratory behavior	PMC12387757
-Homo sapiens	Activity Pattern	PMC12186136
-Homo sapiens	Habitat Complexity	PMC11987482
-Homo sapiens	Habitat Complexity	PMC12166059
-Homo sapiens	Habitat Complexity	PMC12283610
-Gorilla gorilla	Mating System	PMC12307521
-Gorilla gorilla	Mating System	PMC12259804
-Gorilla gorilla	Mating System	PMC12418932
-Gorilla gorilla	Social Dominance Hierarchy	PMC12373394
-Gorilla gorilla	Social Dominance Hierarchy	PMC11751638
-Gorilla gorilla	Social Dominance Hierarchy	PMC12352529
-Gorilla gorilla	Territoriality (males)	PMC7067784
-Gorilla gorilla	Territoriality (males)	PMC6650716
-Gorilla gorilla	Territoriality (females)	PMC10793932
-Gorilla gorilla	Territoriality (females)	PMC8290027
-Gorilla gorilla	Territoriality (females)	PMC7067784
-Gorilla gorilla	Group Size During Reproduction	PMC12373394
-Gorilla gorilla	Group Size During Reproduction	PMC10960106
-Gorilla gorilla	Group Size Outside of Reproduction	PMC11886032
-Gorilla gorilla	Group Size Outside of Reproduction	PMC11939658
-Gorilla gorilla	Group Property	PMC12443317
-Gorilla gorilla	Group Property	PMC12307521
-Gorilla gorilla	Group Property	PMC11761170
-Gorilla gorilla	Age at Maturity	PMC11751638
-Gorilla gorilla	Age at Maturity	PMC11597409
-Gorilla gorilla	# offspring/reproductive bout	PMC9061689
-Gorilla gorilla	Migratory behavior	PMC11058680
-Hylobates lar	Mating System	PMC10995044
-Hylobates lar	Mating System	PMC8970389
-Hylobates lar	Mating System	PMC9668933
-Hylobates lar	Social Dominance Hierarchy	PMC11521368
-Hylobates lar	Social Dominance Hierarchy	PMC8189466
-Hylobates lar	Social Dominance Hierarchy	PMC5342957
-Hylobates lar	Territoriality (females)	PMC4700582
-Hylobates lar	Group Size During Reproduction	PMC11521368
-Hylobates lar	Group Size During Reproduction	PMC7683532
-Hylobates lar	Group Size During Reproduction	PMC4700582
-Hylobates lar	Group Size Outside of Reproduction	PMC11373680
-Hylobates lar	Group Size Outside of Reproduction	PMC4700582
-Hylobates lar	Group Size Outside of Reproduction	PMC2715875
-Hylobates lar	Group Property	PMC12516109
+Rattus norvegicus	average life expectancy	PMC7617729
+Rattus norvegicus	average life expectancy	PMC6968928
+Cavia porcellus	average life expectancy	PMC11117349
+Cavia porcellus	average life expectancy	PMC9286907
+Cavia porcellus	average life expectancy	PMC5002178
+Pan troglodytes	average life expectancy	PMC12557517
+Pan troglodytes	average life expectancy	PMC11904210
+Pan troglodytes	average life expectancy	PMC11095307
+Pan troglodytes	reproductive rate	PMC12514012
+Pan troglodytes	reproductive rate	PMC11904210
+Homo sapiens	average life expectancy	PMC12333494
+Homo sapiens	average life expectancy	PMC9957574
+Homo sapiens	average life expectancy	PMC11975166
+Gorilla gorilla	average life expectancy	PMC12557517
+Gorilla gorilla	average life expectancy	PMC11486795
+Macaca mulatta	average life expectancy	PMC11513645
+Macaca mulatta	average life expectancy	PMC7617729
+Macaca mulatta	average life expectancy	PMC9446855
+Macaca fascicularis	average life expectancy	PMC9965083
+Macaca fascicularis	average life expectancy	PMC7238212
+Macaca fascicularis	reproductive rate	PMC12227786
+Taeniopygia guttata	average life expectancy	PMC12280224
+Taeniopygia guttata	average life expectancy	PMC10965324
+Taeniopygia guttata	average life expectancy	PMC5247499
+Columba livia	average life expectancy	PMC3207724
+Coturnix japonica	average life expectancy	PMC8166319
+Coturnix japonica	reproductive rate	PMC12134424
+Coturnix japonica	reproductive rate	PMC11672450
+Coturnix japonica	reproductive rate	PMC11341563
+Anolis carolinensis	average life expectancy	PMC8395165
