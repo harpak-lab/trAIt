@@ -1,0 +1,15 @@
+trait: num correct / total num
+mating system: 5/9
+social dominance hierarchy: 7/9
+territoriality (males): 5/9
+territoriality (females): 3/7
+group size during reproduction: 4/7
+group size outside of reproduction: 5/9
+group property: 2/8
+age at maturity: avg loss 3.05 (8 values)
+avg life expectancy: avg loss 6.58 (7 values)
+# offspring / reprod bout: avg loss 0.89 (6 values)
+# reprod bouts / year: avg loss 5.05 (2 values)
+migratory behavior: 6/8
+reproductive activity: 5/6
+habitat complexity: 2/8
