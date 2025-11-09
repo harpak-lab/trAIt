@@ -63,7 +63,7 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
 
     desc_part = f" ({trait_desc})" if trait_desc else ""
     prompt = f"""
-    Extract information about the species {species} from the following research paper.
+    Extract information about the WILD species {species} from the following research paper.
     Focus specifically on the trait: {trait}{desc_part}
 
     Return only what is asked, in the fewest possible words.
@@ -178,6 +178,39 @@ Return your result in this exact format:
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
     """Main helper method to process species and traits lists through the pipeline."""
+
+    # ==============================
+    # Sanity Check: Trait Coverage
+    # ==============================
+    # bad_traits = []
+    # trait_avg_counts = {}
+
+    # for trait in traits_list:
+    #     print("Checking trait:", trait)
+    #     total_papers = 0
+    #     for species in species_list:
+    #         print("  Species:", species)
+    #         query = f"wild {species} AND {trait}"
+    #         pmcids = search_papers(query, max_results=20)
+    #         count = len(pmcids)
+    #         total_papers += count
+
+    #     avg_count = total_papers / len(species_list) if species_list else 0
+    #     trait_avg_counts[trait] = avg_count
+    #     if avg_count <= 5:
+    #         bad_traits.append((trait, avg_count))
+    
+    # print("\nTrait coverage summary:")
+    # for trait, avg in trait_avg_counts.items():
+    #     print(f" - {trait}: avg {avg:.2f} papers")
+
+    # if bad_traits:
+    #     print("Traits with low average paper count (<= 5):")
+    #     for trait, avg in bad_traits:
+    #         print(f"  - {trait} (avg: {avg:.2f})")
+    # else:
+    #     print("All traits returned sufficient papers.")
+
     start_time = time.time()
 
     results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
