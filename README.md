@@ -4,21 +4,9 @@ This project automates the retrieval and compilation of species-specific biologi
 
 ---
 
-## 1. Frog Analysis
+## Generalized Data Pipeline
 
-The first phase of this project demonstrates a deep dive into amphibians (frogs) as a proof of concept.  
-- Uses multiple APIs to collect ecological and biological information:  
-  - AmphibiaWeb: morphology and reproductive traits (snout–vent length, clutch size, egg diameter)  
-  - IUCN Red List: elevation ranges and habitat categories  
-  - World Bank CCKP: temperature and rainfall statistics  
-- Automates retrieval of structured (API) and semi-structured (XML parsed via GPT-4o) data  
-- Compiles outputs into a clean CSV/Excel dataset with traits like morphology, reproduction, climate, and altitude  
-
----
-
-## 2. Generalized Data Pipeline
-
-The system then expands into a general-purpose trait extraction pipeline.  
+The system demonstrates a general-purpose trait extraction pipeline.  
 - Uses Europe PMC / PubMed Central (PMC) to query scientific literature  
 - Retrieves PDFs, parses them, and applies LLM-based extraction prompts to pull out traits such as diet, size, habitat, or environmental associations  
 - Works for any list of species and any set of traits, driven by an Excel file and trait description mapping  
@@ -28,17 +16,56 @@ The system then expands into a general-purpose trait extraction pipeline.
 
 ## How to Use
 
-1. Run the GUI script:
+1. Clone the repository (if not already done):
 
    ```bash
-   python3 Data-Compilation-Model/02_generic_data_compilation/scripts/gui.py
+   git clone https://github.com/harpak-lab/Data-Compilation-Model.git
+   cd Data-Compilation-Model
    ```
 
-2. In the popup window:
-   - Upload your Excel file: first column = species, remaining columns = traits.
-   - Upload your trait descriptions text file: UTF-16 encoded; each line in the format **trait: description**.
+2. Install dependencies:
 
-3. Start extraction:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Configure API Keys:
+
+   This project requires API keys for IUCN Red List and OpenAI GPT to retrieve species traits and run extraction.
+
+   **IUCN Red List API**
+   
+   Go to https://api.iucnredlist.org/ and create an account to generate a new API key.
+
+   **OpenAI GPT**
+   
+   Sign up or login at https://platform.openai.com/ to get an API key.
+
+   **Add keys to a .env file in the project root (same folder as requirements.txt).**
+
+   ```bash
+   IUCN_API_KEY=your_iucn_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+4. Make sure you're on the main branch and inside the correct directory:
+
+   ```bash
+   git checkout main
+   cd scripts
+   ```
+
+5. Run the GUI script:
+
+   ```bash
+   python3 gui.py
+   ```
+
+6. In the popup window:
+   - Upload your Excel file: first column = species, remaining columns = traits.
+   - Upload your trait descriptions text file: UTF-8 encoded; each line in the format **trait: description**.
+
+7. Start extraction:
    - Click **Start Data Extraction**.
    - The system will query APIs, fetch papers, and extract trait data.
    - Results will be saved to:
