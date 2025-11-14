@@ -1,53 +1,14 @@
 import os
-import requests
 from openai import OpenAI
 from dotenv import load_dotenv
-import io
-import pdfplumber
 import pandas as pd
 import tiktoken
 import time
 from openai import RateLimitError
+from utils import get_iucn_assessment, search_papers, fetch_pdf, parse_gpt_output
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-BASE_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest"
-PDF_URL = "https://europepmc.org/backend/ptpmcrender.fcgi"
-
-def search_papers(query: str, max_results: int = 20):
-    """Search Europe PMC and return a list of PMCIDs (metadata only)."""
-    search_url = f"{BASE_URL}/search"
-    params = {"query": query, "resultType": "core", "format": "json", "pageSize": max_results}
-    try:
-        resp = requests.get(search_url, params=params, timeout=30)
-        resp.raise_for_status()
-    except requests.RequestException as e:
-        print(f"      EuropePMC error: {e}")
-        return []
-
-    data = resp.json()
-    if "resultList" not in data or "result" not in data["resultList"]:
-        return []
-
-    pmcids = [article.get("pmcid") for article in data["resultList"]["result"] if article.get("pmcid")]
-    return pmcids
-
-
-def fetch_pdf(pmcid: str):
-    """Download and parse a single PDF by PMCID."""
-    pdf_url = f"{PDF_URL}?accid={pmcid}&blobtype=pdf"
-    try:
-        pdf_resp = requests.get(pdf_url, timeout=30)
-        if pdf_resp.status_code == 200 and pdf_resp.headers.get("Content-Type") == "application/pdf":
-            with pdfplumber.open(io.BytesIO(pdf_resp.content)) as pdf:
-                text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-            if text.strip():
-                print(f"     Retrieved PDF {pmcid}")
-                return text
-    except Exception as e:
-        print(f"      Failed to fetch/parse PDF {pmcid}: {e}")
-    return None
 
 def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_desc: str = ""):
     """Ask GPT to extract a single trait from a single paper."""
@@ -79,8 +40,7 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     """
 
     # debugging purposes
-    print(
-    f"""
+    print(f"""
     Extract information about the species {species} from the following research paper.
     Focus specifically on the trait: {trait}{desc_part}
 
@@ -118,23 +78,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
             break # don’t retry unknown errors
 
     return f"{trait}: N/A"
-
-def parse_gpt_output(gpt_output, trait):
-    """Parse GPT output to extract information for a single trait."""
-    lines = gpt_output.split('\n')
-    
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-        base_patterns = [f"{trait.lower()}:", f"*{trait.lower()}*:", f"**{trait.lower()}**:"]
-        possible_patterns = base_patterns + [f"- {p}" for p in base_patterns]
-        if line.lower().startswith(tuple(possible_patterns)):
-            value = line.split(":", 1)[1].strip() if ":" in line else ""
-            if value.startswith("[") and value.endswith("]"):
-                value = value[1:-1].strip()
-            return value
-    return "N/A"
 
 def summarize_answers_with_gpt(species: str, trait: str, answers: list):
     if not answers:
@@ -242,6 +185,14 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
         species = row["Species"]
         print(f"\nProcessing {species}...")
 
+        # grab iucn
+        genus, sp = species.split(" ", 1) if " " in species else (species, "")
+        iucn_data = get_iucn_assessment(genus, sp)
+        if iucn_data:
+            print("  Retrieved IUCN data.")
+        else:
+            print("  No IUCN data found.")
+
         for trait in traits_list:
             print(f"  Processing trait: {trait}")
 
@@ -250,8 +201,51 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             if trait_descriptions:
                 trait_desc = trait_descriptions.get(trait, "")
 
+            # IUCN + GPT PIPELINE
+            if iucn_data:
+                try:
+                    iucn_prompt = f"""
+                    Extract the value of the trait "{trait}" for the species {species}
+                    from the following IUCN Red List JSON data.
+                    {trait}: {trait_desc}
+
+                    If the JSON does not contain the information, respond with "N/A".
+                    Return your answer exactly as:
+                    {trait}: [short fact(s)]
+
+                    JSON:
+                    {iucn_data}
+                    """
+
+                    # debugging
+                    print(f"""
+                    Extract the value of the trait "{trait}" for the species {species}
+                    from the following IUCN Red List JSON data.
+                    {trait}: {trait_desc}
+                    """)
+
+                    response = client.chat.completions.create(
+                        model="gpt-5-nano",
+                        messages=[
+                            {"role": "system", "content": "You are a helpful assistant that extracts factual data from structured JSON."},
+                            {"role": "user", "content": iucn_prompt}
+                        ],
+                        max_completion_tokens=2000,
+                    )
+                    gpt_output = response.choices[0].message.content.strip()
+                    value = parse_gpt_output(gpt_output, trait)
+                    if value not in ("N/A", "[N/A]", ""):
+                        print(f"    IUCN found {trait}: {value}")
+                        results.at[idx, trait] = value
+                        continue  # skip to next trait
+                    else:
+                        print(f"    IUCN has no data for {trait}, moving to papers")
+                except Exception as e:
+                    print(f"    IUCN GPT extraction failed for {trait}: {e}")
+            
+            # PUBMED API + GPT PIPELINE
             query = f"wild {species} AND {trait}"
-            pmcids = search_papers(query, max_results=20)
+            pmcids = search_papers(query, max_results=10)
 
             if not pmcids:
                 print(f"    No papers found for {species} {trait}")

@@ -1,0 +1,12 @@
+SVL Male: average Snout–Vent Length of males, return a number in millimeters (without units).
+SVL Female: average Snout–Vent Length of females, return a number in millimeters (without units).
+Average SVL Adult: average Snout–Vent Length of adults, return a number in millimeters (without units).
+Egg Clutch: average size of the egg clutch, return a whole number.
+Average Temperature: return a number in celsius (without units).
+Average Rainfall: return a number in millimeters (without units).
+Average Altitude: return a number in meters (without units).
+Egg Style: return one of (aquatic, terrestrial, live-bearing).
+Average Hatch Time: return a number in weeks (without units).
+Average Development Time: return a number in weeks (without units).
+Average Time of Day: Activity pattern, so when the individuals are most active. Return one of (diurnal, nocturnal, crepuscular, cathemeral). diurnal = during the day; nocturnal = at night; crepuscular = just before sunset and just before sunrise; cathemeral = during the day and night.
+Average Age at Maturity: Return single value in years; if range, return average.
