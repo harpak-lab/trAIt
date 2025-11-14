@@ -14,7 +14,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     """Ask GPT to extract a single trait from a single paper."""
     encoding = tiktoken.encoding_for_model("gpt-5-nano")
     tokens = encoding.encode(paper_text)
-    print(f"      Original paper length: {len(tokens)} tokens")
     max_allowed_tokens = 120000
     if len(tokens) > max_allowed_tokens:
         tokens = tokens[:max_allowed_tokens]
@@ -39,21 +38,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     {truncated_text}
     """
 
-    # debugging purposes
-    print(f"""
-    Extract information about the species {species} from the following research paper.
-    Focus specifically on the trait: {trait}{desc_part}
-
-    Return only the key fact(s), in the fewest possible words.
-    Do not write full sentences, explanations, or background.
-    Output should be just the essential data points (e.g., "10 cm", "desert habitats").
-    If no information is found, respond with "N/A".
-
-    Format your response EXACTLY as:
-    {trait}: [short fact(s)]
-    """
-    )
-
     for attempt in range(5): # up to 5 tries
         try:
             response = client.chat.completions.create(
@@ -65,7 +49,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
                 max_completion_tokens=2000,
             )
             result = response.choices[0].message.content.strip()
-            print(f"GPT response: {result}")
             return result
 
         except RateLimitError as e:
@@ -154,8 +137,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     # else:
     #     print("All traits returned sufficient papers.")
 
-    start_time = time.time()
-
     results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
     os.makedirs(results_dir, exist_ok=True)
     output_path = os.path.join(results_dir, output_file)
@@ -188,10 +169,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
         # grab iucn
         genus, sp = species.split(" ", 1) if " " in species else (species, "")
         iucn_data = get_iucn_assessment(genus, sp)
-        if iucn_data:
-            print("  Retrieved IUCN data.")
-        else:
-            print("  No IUCN data found.")
 
         for trait in traits_list:
             print(f"  Processing trait: {trait}")
@@ -217,13 +194,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     {iucn_data}
                     """
 
-                    # debugging
-                    print(f"""
-                    Extract the value of the trait "{trait}" for the species {species}
-                    from the following IUCN Red List JSON data.
-                    {trait}: {trait_desc}
-                    """)
-
                     response = client.chat.completions.create(
                         model="gpt-5-nano",
                         messages=[
@@ -235,11 +205,8 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     gpt_output = response.choices[0].message.content.strip()
                     value = parse_gpt_output(gpt_output, trait)
                     if value not in ("N/A", "[N/A]", ""):
-                        print(f"    IUCN found {trait}: {value}")
                         results.at[idx, trait] = value
                         continue  # skip to next trait
-                    else:
-                        print(f"    IUCN has no data for {trait}, moving to papers")
                 except Exception as e:
                     print(f"    IUCN GPT extraction failed for {trait}: {e}")
             
@@ -248,14 +215,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             pmcids = search_papers(query, max_results=10)
 
             if not pmcids:
-                print(f"    No papers found for {species} {trait}")
                 results.at[idx, trait] = ""
                 continue
 
             answers = []  # store up to 3 valid extracted answers
 
             for paper_idx, pmcid in enumerate(pmcids[:20]):  # check up to 20 papers
-                print(f"    Trying paper {paper_idx + 1}/{min(20, len(pmcids))} for {trait}")
                 paper_text = fetch_pdf(pmcid)
                 if not paper_text:
                     continue
@@ -267,7 +232,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 try:
                     gpt_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
                     value = parse_gpt_output(gpt_output, trait)
-                    print(f"      Extracted value from paper {paper_idx + 1}: {value}")
 
                     if value not in ("N/A", "[N/A]", ""):
                         # log successful papers (where GPT extracted a valid answer)
@@ -275,32 +239,21 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                             f.write(f"{species}\t{trait}\t{pmcid}\n")
                         answers.append(value)
                         if len(answers) >= 3:
-                            print("      Collected 3 valid answers; stopping paper scan.")
                             break
                 except Exception as e:
                     print(f"      GPT error for {species} {trait} paper {paper_idx + 1}: {e}")
 
             # consensus stage
             if answers:
-                print(f"    Collected answers for {trait}: {answers}")
                 consensus_output = summarize_answers_with_gpt(species, trait, answers)
                 final_value = parse_gpt_output(consensus_output, trait)
                 results.at[idx, trait] = final_value
-                print(f"    Final consensus for {trait}: {final_value}")
             else:
                 results.at[idx, trait] = ""
-                print(f"    No valid information found for {trait} after {len(pmcids)} papers")
             
         # save results
         results.to_csv(output_path, index=False)
 
     print(f"\nResults written to {output_file}")
-
-    # timing
-    end_time = time.time()
-    total_time = end_time - start_time
-    hours, rem = divmod(total_time, 3600)
-    minutes, seconds = divmod(rem, 60)
-    print(f"\nTotal processing time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
 
     return results
