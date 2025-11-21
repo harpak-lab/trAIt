@@ -1,0 +1,75 @@
+Icterus pectoralis	Cooperative breeding	PMC3541721
+Icterus pectoralis	Cooperative breeding	PMC4895472
+Icterus pectoralis	Communal foraging	PMC3541720
+Forpus conspicillatus	Cooperative breeding	PMC7331019
+Forpus conspicillatus	Cooperative breeding	PMC5242088
+Forpus conspicillatus	Cooperative breeding	PMC6688569
+Forpus conspicillatus	Communal foraging	PMC8419581
+Forpus conspicillatus	Sociality outside of breeding	PMC8419581
+Forpus conspicillatus	Sociality outside of breeding	PMC7331019
+Forpus conspicillatus	Sociality outside of breeding	PMC6731237
+Melopsittacus undulatus	Maximum colony size	PMC10799565
+Melopsittacus undulatus	Maximum colony size	PMC10265024
+Mesophoyx intermedia	Migratory	PMC9230657
+Mesophoyx intermedia	Migratory	PMC5063893
+Mesophoyx intermedia	Habitat Type	PMC6466120
+Mesophoyx intermedia	Habitat Type	PMC9420292
+Mesophoyx intermedia	Habitat Type	PMC5063893
+Calyptorhynchus banksii	Cooperative breeding	PMC7687885
+Barnardius zonarius	Body Mass (g)	PMC7222765
+Barnardius zonarius	Migratory	PMC6020700
+Barnardius zonarius	Habitat Type	PMC7149733
+Circus aeruginosus	Body Mass (g)	PMC9745957
+Circus aeruginosus	Cooperative breeding	PMC7329042
+Circus aeruginosus	Cooperative breeding	PMC1692946
+Circus aeruginosus	Cooperative breeding	PMC1692942
+Circus aeruginosus	Migratory	PMC12593685
+Circus aeruginosus	Migratory	PMC9745957
+Circus aeruginosus	Migratory	PMC11869888
+Aptenodytes patagonicus	Body Mass (g)	PMC9296559
+Aptenodytes patagonicus	Colonial	PMC11305131
+Aptenodytes patagonicus	Colonial	PMC12219785
+Aptenodytes patagonicus	Colonial	PMC10415367
+Aptenodytes patagonicus	Maximum colony size	PMC11305131
+Aptenodytes patagonicus	Maximum colony size	PMC10376525
+Aptenodytes patagonicus	Maximum colony size	PMC10415367
+Aptenodytes patagonicus	Cooperative breeding	PMC12219785
+Aptenodytes patagonicus	Cooperative breeding	PMC10879839
+Aptenodytes patagonicus	Cooperative breeding	PMC12286207
+Ara macao	Body Mass (g)	PMC11872948
+Ara macao	Colonial	PMC11150271
+Ara macao	Cooperative breeding	PMC11150271
+Ara macao	Cooperative breeding	PMC7163613
+Pluvialis squatarola	Body Mass (g)	PMC4914580
+Pluvialis squatarola	Body Mass (g)	PMC3441360
+Pluvialis squatarola	Habitat Type	PMC9104863
+Pluvialis squatarola	Habitat Type	PMC6940729
+Pluvialis squatarola	Habitat Type	PMC9420292
+Lybius torquatus	Body Mass (g)	PMC8840882
+Poicephalus gulielmi	Colonial	PMC1183234
+Grus leucogeranus	Cooperative breeding	PMC2649137
+Grus leucogeranus	Migratory	PMC12189369
+Grus leucogeranus	Migratory	PMC12456024
+Grus leucogeranus	Migratory	PMC11614848
+Grus leucogeranus	Habitat Type	PMC12456024
+Grus leucogeranus	Habitat Type	PMC11614848
+Grus leucogeranus	Habitat Type	PMC12231202
+Aquila audax	Body Mass (g)	PMC3826236
+Aquila audax	Cooperative breeding	PMC7687885
+Aquila audax	Cooperative breeding	PMC4377648
+Cygnus cygnus	Body Mass (g)	PMC12088674
+Cygnus cygnus	Maximum colony size	PMC9860062
+Cygnus cygnus	Cooperative breeding	PMC10707585
+Cygnus cygnus	Cooperative breeding	PMC12303340
+Cygnus cygnus	Cooperative breeding	PMC12291917
+Turtur chalcospilos	Body Mass (g)	PMC8840882
+Buteo lagopus	Body Mass (g)	PMC9745957
+Tachycineta bicolor	Body Mass (g)	PMC11415550
+Tachycineta bicolor	Colonial	PMC7331019
+Tachycineta bicolor	Cooperative breeding	PMC11719028
+Tachycineta bicolor	Cooperative breeding	PMC8595685
+Tachycineta bicolor	Cooperative breeding	PMC7138727
+Gallinula ventralis	Habitat Type	PMC10705787
+Anas strepera	Colonial	PMC10628658
+Anas strepera	Colonial	PMC11271962
+Anas strepera	Colonial	PMC3113761

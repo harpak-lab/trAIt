@@ -1,0 +1,544 @@
+Icterus pectoralis	Body Mass (g)	PMC9998805
+Icterus pectoralis	Body Mass (g)	PMC5760208
+Icterus pectoralis	Body Mass (g)	PMC9379246
+Icterus pectoralis	Body Mass (g)	PMC12163242
+Icterus pectoralis	Body Mass (g)	PMC3541721
+Icterus pectoralis	Body Mass (g)	PMC11177578
+Icterus pectoralis	Body Mass (g)	PMC3601094
+Icterus pectoralis	Body Mass (g)	PMC6208314
+Icterus pectoralis	Body Mass (g)	PMC7190084
+Icterus pectoralis	Body Mass (g)	PMC7385936
+Icterus pectoralis	Brain Mass (g)	PMC9379246
+Icterus pectoralis	Brain Mass (g)	PMC12163242
+Icterus pectoralis	Brain Mass (g)	PMC11177578
+Icterus pectoralis	Brain Mass (g)	PMC7385936
+Icterus pectoralis	Brain Mass (g)	PMC7190084
+Icterus pectoralis	Brain Mass (g)	PMC6208314
+Icterus pectoralis	Brain Mass (g)	PMC7167893
+Icterus pectoralis	Brain Mass (g)	PMC3303862
+Icterus pectoralis	Brain Mass (g)	PMC4429500
+Icterus pectoralis	Brain Mass (g)	PMC4894295
+Icterus pectoralis	Colonial	PMC6080057
+Icterus pectoralis	Colonial	PMC4868922
+Icterus pectoralis	Maximum colony size	PMC12163242
+Icterus pectoralis	Maximum colony size	PMC11177578
+Icterus pectoralis	Maximum colony size	PMC9379246
+Icterus pectoralis	Maximum colony size	PMC6208314
+Icterus pectoralis	Maximum colony size	PMC4895472
+Icterus pectoralis	Maximum colony size	PMC4894295
+Icterus pectoralis	Maximum colony size	PMC7122588
+Icterus pectoralis	Maximum colony size	PMC6080057
+Icterus pectoralis	Maximum colony size	PMC7167893
+Icterus pectoralis	Maximum colony size	PMC4429500
+Icterus pectoralis	Cooperative breeding	PMC3541721
+Icterus pectoralis	Cooperative breeding	PMC11177578
+Icterus pectoralis	Cooperative breeding	PMC6208314
+Icterus pectoralis	Cooperative breeding	PMC4894295
+Icterus pectoralis	Cooperative breeding	PMC4895472
+Icterus pectoralis	Cooperative breeding	PMC7190084
+Icterus pectoralis	Cooperative breeding	PMC6730977
+Icterus pectoralis	Communal foraging	PMC3541720
+Icterus pectoralis	Communal foraging	PMC6080057
+Forpus conspicillatus	Body Mass (g)	PMC6731237
+Forpus conspicillatus	Body Mass (g)	PMC5242088
+Forpus conspicillatus	Brain Mass (g)	PMC5242088
+Forpus conspicillatus	Colonial	PMC7331019
+Forpus conspicillatus	Cooperative breeding	PMC7331019
+Forpus conspicillatus	Cooperative breeding	PMC5242088
+Forpus conspicillatus	Cooperative breeding	PMC6688569
+Forpus conspicillatus	Communal foraging	PMC8419581
+Forpus conspicillatus	Communal foraging	PMC3234552
+Forpus conspicillatus	Sociality outside of breeding	PMC8419581
+Forpus conspicillatus	Sociality outside of breeding	PMC7331019
+Forpus conspicillatus	Sociality outside of breeding	PMC6731237
+Morus serrator	Body Mass (g)	PMC11925302
+Morus serrator	Body Mass (g)	PMC11585116
+Morus serrator	Body Mass (g)	PMC10144497
+Morus serrator	Body Mass (g)	PMC9958011
+Morus serrator	Body Mass (g)	PMC6023466
+Morus serrator	Body Mass (g)	PMC10705787
+Morus serrator	Body Mass (g)	PMC4806299
+Morus serrator	Body Mass (g)	PMC6675807
+Morus serrator	Body Mass (g)	PMC7122709
+Morus serrator	Brain Mass (g)	PMC11323545
+Morus serrator	Brain Mass (g)	PMC7122709
+Morus serrator	Maximum colony size	PMC11925302
+Morus serrator	Maximum colony size	PMC11323545
+Morus serrator	Maximum colony size	PMC12223544
+Morus serrator	Maximum colony size	PMC9586080
+Morus serrator	Maximum colony size	PMC5859426
+Morus serrator	Maximum colony size	PMC3689132
+Morus serrator	Communal foraging	PMC10144497
+Melopsittacus undulatus	Body Mass (g)	PMC12119371
+Melopsittacus undulatus	Body Mass (g)	PMC11794420
+Melopsittacus undulatus	Body Mass (g)	PMC11988100
+Melopsittacus undulatus	Body Mass (g)	PMC12151017
+Melopsittacus undulatus	Body Mass (g)	PMC11739604
+Melopsittacus undulatus	Body Mass (g)	PMC11078280
+Melopsittacus undulatus	Body Mass (g)	PMC11069563
+Melopsittacus undulatus	Body Mass (g)	PMC12077225
+Melopsittacus undulatus	Body Mass (g)	PMC7617403
+Melopsittacus undulatus	Body Mass (g)	PMC12034150
+Melopsittacus undulatus	Brain Mass (g)	PMC11078280
+Melopsittacus undulatus	Brain Mass (g)	PMC12311951
+Melopsittacus undulatus	Brain Mass (g)	PMC9495142
+Melopsittacus undulatus	Brain Mass (g)	PMC12475149
+Melopsittacus undulatus	Brain Mass (g)	PMC11883395
+Melopsittacus undulatus	Brain Mass (g)	PMC12520376
+Melopsittacus undulatus	Brain Mass (g)	PMC10337904
+Melopsittacus undulatus	Brain Mass (g)	PMC11193425
+Melopsittacus undulatus	Brain Mass (g)	PMC10990284
+Melopsittacus undulatus	Brain Mass (g)	PMC9368838
+Melopsittacus undulatus	Maximum colony size	PMC10799565
+Melopsittacus undulatus	Maximum colony size	PMC11078280
+Melopsittacus undulatus	Maximum colony size	PMC12298428
+Melopsittacus undulatus	Maximum colony size	PMC10265024
+Melopsittacus undulatus	Maximum colony size	PMC11193425
+Melopsittacus undulatus	Maximum colony size	PMC8612468
+Melopsittacus undulatus	Maximum colony size	PMC10597326
+Melopsittacus undulatus	Maximum colony size	PMC5882950
+Melopsittacus undulatus	Maximum colony size	PMC8238721
+Melopsittacus undulatus	Maximum colony size	PMC4902812
+Mesophoyx intermedia	Body Mass (g)	PMC7009844
+Mesophoyx intermedia	Brain Mass (g)	PMC7009844
+Mesophoyx intermedia	Colonial	PMC11887621
+Mesophoyx intermedia	Colonial	PMC5804217
+Mesophoyx intermedia	Colonial	PMC3516332
+Mesophoyx intermedia	Maximum colony size	PMC5804217
+Mesophoyx intermedia	Migratory	PMC12109046
+Mesophoyx intermedia	Migratory	PMC11963580
+Mesophoyx intermedia	Migratory	PMC10500733
+Mesophoyx intermedia	Migratory	PMC11887621
+Mesophoyx intermedia	Migratory	PMC9230657
+Mesophoyx intermedia	Migratory	PMC9420292
+Mesophoyx intermedia	Migratory	PMC5418332
+Mesophoyx intermedia	Migratory	PMC3918735
+Mesophoyx intermedia	Migratory	PMC6466120
+Mesophoyx intermedia	Migratory	PMC5063893
+Mesophoyx intermedia	Habitat Type	PMC10285696
+Mesophoyx intermedia	Habitat Type	PMC5804217
+Mesophoyx intermedia	Habitat Type	PMC6466120
+Mesophoyx intermedia	Habitat Type	PMC9420292
+Mesophoyx intermedia	Habitat Type	PMC4517750
+Mesophoyx intermedia	Habitat Type	PMC5063893
+Gnorimopsar chopi	Body Mass (g)	PMC12608582
+Gnorimopsar chopi	Body Mass (g)	PMC9107591
+Gnorimopsar chopi	Body Mass (g)	PMC6280514
+Gnorimopsar chopi	Body Mass (g)	PMC7121861
+Gnorimopsar chopi	Brain Mass (g)	PMC7121861
+Gnorimopsar chopi	Colonial	PMC5996533
+Calyptorhynchus banksii	Body Mass (g)	PMC11784592
+Calyptorhynchus banksii	Body Mass (g)	PMC7687885
+Calyptorhynchus banksii	Body Mass (g)	PMC10316125
+Calyptorhynchus banksii	Body Mass (g)	PMC10705787
+Calyptorhynchus banksii	Body Mass (g)	PMC7121861
+Calyptorhynchus banksii	Brain Mass (g)	PMC7687885
+Calyptorhynchus banksii	Brain Mass (g)	PMC7121861
+Calyptorhynchus banksii	Cooperative breeding	PMC7687885
+Calyptorhynchus banksii	Communal foraging	PMC7687885
+Calyptorhynchus banksii	Sociality outside of breeding	PMC9854913
+Bartramia longicauda	Body Mass (g)	PMC9849706
+Bartramia longicauda	Body Mass (g)	PMC6211720
+Bartramia longicauda	Body Mass (g)	PMC5760208
+Barnardius zonarius	Body Mass (g)	PMC10705787
+Barnardius zonarius	Body Mass (g)	PMC7222765
+Barnardius zonarius	Body Mass (g)	PMC4585972
+Barnardius zonarius	Body Mass (g)	PMC4130445
+Barnardius zonarius	Migratory	PMC6020700
+Barnardius zonarius	Migratory	PMC7521809
+Barnardius zonarius	Migratory	PMC4585972
+Barnardius zonarius	Migratory	PMC5439460
+Barnardius zonarius	Habitat Type	PMC11189211
+Barnardius zonarius	Habitat Type	PMC11035363
+Barnardius zonarius	Habitat Type	PMC10705787
+Barnardius zonarius	Habitat Type	PMC8572848
+Barnardius zonarius	Habitat Type	PMC6020700
+Barnardius zonarius	Habitat Type	PMC7521809
+Barnardius zonarius	Habitat Type	PMC7149733
+Barnardius zonarius	Habitat Type	PMC7222765
+Barnardius zonarius	Habitat Type	PMC3270582
+Barnardius zonarius	Habitat Type	PMC3289156
+Leptotila rufaxilla	Body Mass (g)	PMC12608582
+Leptotila rufaxilla	Body Mass (g)	PMC9107591
+Leptotila rufaxilla	Body Mass (g)	PMC5760208
+Circus aeruginosus	Body Mass (g)	PMC12277224
+Circus aeruginosus	Body Mass (g)	PMC9745957
+Circus aeruginosus	Body Mass (g)	PMC9546832
+Circus aeruginosus	Body Mass (g)	PMC11949540
+Circus aeruginosus	Body Mass (g)	PMC10000144
+Circus aeruginosus	Body Mass (g)	PMC10776223
+Circus aeruginosus	Body Mass (g)	PMC8880244
+Circus aeruginosus	Body Mass (g)	PMC7329042
+Circus aeruginosus	Body Mass (g)	PMC8707747
+Circus aeruginosus	Body Mass (g)	PMC6675766
+Circus aeruginosus	Brain Mass (g)	PMC8880244
+Circus aeruginosus	Brain Mass (g)	PMC8707747
+Circus aeruginosus	Brain Mass (g)	PMC6675766
+Circus aeruginosus	Brain Mass (g)	PMC7009621
+Circus aeruginosus	Brain Mass (g)	PMC7121861
+Circus aeruginosus	Brain Mass (g)	PMC7122709
+Circus aeruginosus	Maximum colony size	PMC11869888
+Circus aeruginosus	Maximum colony size	PMC12443268
+Circus aeruginosus	Maximum colony size	PMC7564710
+Circus aeruginosus	Maximum colony size	PMC6244866
+Circus aeruginosus	Maximum colony size	PMC7381563
+Circus aeruginosus	Maximum colony size	PMC5674037
+Circus aeruginosus	Cooperative breeding	PMC7329042
+Circus aeruginosus	Cooperative breeding	PMC1692946
+Circus aeruginosus	Cooperative breeding	PMC1692942
+Circus aeruginosus	Communal foraging	PMC10854542
+Circus aeruginosus	Migratory	PMC12263196
+Circus aeruginosus	Migratory	PMC12222378
+Circus aeruginosus	Migratory	PMC12323745
+Circus aeruginosus	Migratory	PMC12593685
+Circus aeruginosus	Migratory	PMC9745957
+Circus aeruginosus	Migratory	PMC11898200
+Circus aeruginosus	Migratory	PMC11869888
+Tanygnathus lucionensis	Body Mass (g)	PMC12520376
+Tanygnathus lucionensis	Body Mass (g)	PMC6661147
+Tanygnathus lucionensis	Body Mass (g)	PMC4641592
+Tanygnathus lucionensis	Brain Mass (g)	PMC12520376
+Aptenodytes patagonicus	Body Mass (g)	PMC12088674
+Aptenodytes patagonicus	Body Mass (g)	PMC11966152
+Aptenodytes patagonicus	Body Mass (g)	PMC11305131
+Aptenodytes patagonicus	Body Mass (g)	PMC9705817
+Aptenodytes patagonicus	Body Mass (g)	PMC12219785
+Aptenodytes patagonicus	Body Mass (g)	PMC12618961
+Aptenodytes patagonicus	Body Mass (g)	PMC11773462
+Aptenodytes patagonicus	Body Mass (g)	PMC12520376
+Aptenodytes patagonicus	Body Mass (g)	PMC11538984
+Aptenodytes patagonicus	Body Mass (g)	PMC9296559
+Aptenodytes patagonicus	Brain Mass (g)	PMC12520376
+Aptenodytes patagonicus	Brain Mass (g)	PMC10806059
+Aptenodytes patagonicus	Brain Mass (g)	PMC11303033
+Aptenodytes patagonicus	Brain Mass (g)	PMC11372179
+Aptenodytes patagonicus	Brain Mass (g)	PMC9748805
+Aptenodytes patagonicus	Brain Mass (g)	PMC11586549
+Aptenodytes patagonicus	Brain Mass (g)	PMC12208620
+Aptenodytes patagonicus	Brain Mass (g)	PMC10755187
+Aptenodytes patagonicus	Brain Mass (g)	PMC9300183
+Aptenodytes patagonicus	Brain Mass (g)	PMC5242088
+Aptenodytes patagonicus	Colonial	PMC11305131
+Aptenodytes patagonicus	Colonial	PMC12219785
+Aptenodytes patagonicus	Colonial	PMC10415367
+Aptenodytes patagonicus	Maximum colony size	PMC11966152
+Aptenodytes patagonicus	Maximum colony size	PMC10907422
+Aptenodytes patagonicus	Maximum colony size	PMC12088674
+Aptenodytes patagonicus	Maximum colony size	PMC11305131
+Aptenodytes patagonicus	Maximum colony size	PMC12288800
+Aptenodytes patagonicus	Maximum colony size	PMC10376525
+Aptenodytes patagonicus	Maximum colony size	PMC10415367
+Aptenodytes patagonicus	Cooperative breeding	PMC12219785
+Aptenodytes patagonicus	Cooperative breeding	PMC10879839
+Aptenodytes patagonicus	Cooperative breeding	PMC12286207
+Prosopeia tabuensis	Body Mass (g)	PMC2607380
+Ara macao	Body Mass (g)	PMC12189678
+Ara macao	Body Mass (g)	PMC11311102
+Ara macao	Body Mass (g)	PMC11872948
+Ara macao	Body Mass (g)	PMC10698882
+Ara macao	Body Mass (g)	PMC9953091
+Ara macao	Body Mass (g)	PMC11150271
+Ara macao	Body Mass (g)	PMC7617403
+Ara macao	Body Mass (g)	PMC12013888
+Ara macao	Body Mass (g)	PMC11275593
+Ara macao	Body Mass (g)	PMC10487105
+Ara macao	Brain Mass (g)	PMC12189678
+Ara macao	Brain Mass (g)	PMC11311102
+Ara macao	Brain Mass (g)	PMC10698882
+Ara macao	Brain Mass (g)	PMC11150271
+Ara macao	Brain Mass (g)	PMC8941425
+Ara macao	Brain Mass (g)	PMC10107227
+Ara macao	Brain Mass (g)	PMC7574654
+Ara macao	Brain Mass (g)	PMC6554635
+Ara macao	Brain Mass (g)	PMC3648530
+Ara macao	Brain Mass (g)	PMC7121861
+Ara macao	Colonial	PMC11150271
+Ara macao	Colonial	PMC10576146
+Ara macao	Colonial	PMC9331704
+Ara macao	Colonial	PMC6135383
+Ara macao	Colonial	PMC3060860
+Ara macao	Colonial	PMC281588
+Ara macao	Maximum colony size	PMC7463038
+Ara macao	Maximum colony size	PMC7163484
+Ara macao	Maximum colony size	PMC7163613
+Ara macao	Maximum colony size	PMC7103113
+Ara macao	Maximum colony size	PMC4835977
+Ara macao	Maximum colony size	PMC7095441
+Ara macao	Cooperative breeding	PMC11150271
+Ara macao	Cooperative breeding	PMC7163613
+Ara macao	Communal foraging	PMC12189678
+Ara macao	Communal foraging	PMC8941425
+Ara macao	Sociality outside of breeding	PMC11150271
+Ara macao	Sociality outside of breeding	PMC9854913
+Pluvialis squatarola	Body Mass (g)	PMC11850438
+Pluvialis squatarola	Body Mass (g)	PMC10316125
+Pluvialis squatarola	Body Mass (g)	PMC9104863
+Pluvialis squatarola	Body Mass (g)	PMC6211720
+Pluvialis squatarola	Body Mass (g)	PMC4914580
+Pluvialis squatarola	Body Mass (g)	PMC5760208
+Pluvialis squatarola	Body Mass (g)	PMC3441360
+Pluvialis squatarola	Body Mass (g)	PMC11375690
+Pluvialis squatarola	Body Mass (g)	PMC3409136
+Pluvialis squatarola	Body Mass (g)	PMC3395693
+Pluvialis squatarola	Brain Mass (g)	PMC3441360
+Pluvialis squatarola	Maximum colony size	PMC12223544
+Pluvialis squatarola	Habitat Type	PMC10316125
+Pluvialis squatarola	Habitat Type	PMC12116004
+Pluvialis squatarola	Habitat Type	PMC9104863
+Pluvialis squatarola	Habitat Type	PMC6940729
+Pluvialis squatarola	Habitat Type	PMC9315492
+Pluvialis squatarola	Habitat Type	PMC9420292
+Lybius torquatus	Body Mass (g)	PMC8840882
+Lybius torquatus	Body Mass (g)	PMC10705787
+Lybius torquatus	Colonial	PMC8548802
+Lybius torquatus	Cooperative breeding	PMC12602040
+Onychognathus salvadorii	Cooperative breeding	PMC11394654
+Poicephalus gulielmi	Body Mass (g)	PMC11960656
+Poicephalus gulielmi	Body Mass (g)	PMC7121861
+Poicephalus gulielmi	Brain Mass (g)	PMC11960656
+Poicephalus gulielmi	Brain Mass (g)	PMC7121861
+Poicephalus gulielmi	Colonial	PMC1183234
+Circaetus fasciolatus	Body Mass (g)	PMC7122709
+Circaetus fasciolatus	Brain Mass (g)	PMC7122709
+Gallinago nobilis	Body Mass (g)	PMC7122709
+Gallinago nobilis	Brain Mass (g)	PMC7122709
+Butastur indicus	Body Mass (g)	PMC7158200
+Butastur indicus	Brain Mass (g)	PMC7158200
+Butastur indicus	Maximum colony size	PMC7158200
+Grus leucogeranus	Body Mass (g)	PMC12231202
+Grus leucogeranus	Body Mass (g)	PMC12523391
+Grus leucogeranus	Body Mass (g)	PMC10375961
+Grus leucogeranus	Body Mass (g)	PMC10485337
+Grus leucogeranus	Body Mass (g)	PMC10862172
+Grus leucogeranus	Body Mass (g)	PMC11008731
+Grus leucogeranus	Body Mass (g)	PMC8182418
+Grus leucogeranus	Body Mass (g)	PMC9104863
+Grus leucogeranus	Body Mass (g)	PMC8462277
+Grus leucogeranus	Body Mass (g)	PMC7009844
+Grus leucogeranus	Brain Mass (g)	PMC7009844
+Grus leucogeranus	Cooperative breeding	PMC2649137
+Grus leucogeranus	Communal foraging	PMC12523391
+Grus leucogeranus	Communal foraging	PMC8948072
+Grus leucogeranus	Migratory	PMC12189369
+Grus leucogeranus	Migratory	PMC12456024
+Grus leucogeranus	Migratory	PMC11545394
+Grus leucogeranus	Migratory	PMC11614848
+Grus leucogeranus	Habitat Type	PMC12523391
+Grus leucogeranus	Habitat Type	PMC12456024
+Grus leucogeranus	Habitat Type	PMC12520626
+Grus leucogeranus	Habitat Type	PMC11614848
+Grus leucogeranus	Habitat Type	PMC12231202
+Phaetusa simplex	Body Mass (g)	PMC11760084
+Phaenicophaeus tristis	Body Mass (g)	PMC3577090
+Phaenicophaeus tristis	Brain Mass (g)	PMC3577090
+Phaenicophaeus tristis	Colonial	PMC3577090
+Phaenicophaeus tristis	Cooperative breeding	PMC3577090
+Falco deiroleucus	Body Mass (g)	PMC9219490
+Anas aucklandica	Body Mass (g)	PMC4715441
+Anas aucklandica	Body Mass (g)	PMC4670201
+Centropus sinensis	Body Mass (g)	PMC12451437
+Centropus sinensis	Body Mass (g)	PMC10885907
+Centropus sinensis	Body Mass (g)	PMC10705787
+Centropus sinensis	Body Mass (g)	PMC5809028
+Centropus sinensis	Body Mass (g)	PMC6829833
+Centropus sinensis	Brain Mass (g)	PMC6829833
+Centropus sinensis	Colonial	PMC11869888
+Centropus sinensis	Maximum colony size	PMC12256599
+Centropus sinensis	Maximum colony size	PMC11869888
+Centropus sinensis	Maximum colony size	PMC6829833
+Burhinus grallarius	Body Mass (g)	PMC11090946
+Burhinus grallarius	Body Mass (g)	PMC10705787
+Burhinus grallarius	Body Mass (g)	PMC10316125
+Burhinus grallarius	Body Mass (g)	PMC9652606
+Anas eatoni	Body Mass (g)	PMC3471417
+Anas eatoni	Body Mass (g)	PMC7122709
+Anas eatoni	Brain Mass (g)	PMC7122709
+Hemiphaga novaeseelandiae	Body Mass (g)	PMC10705787
+Hemiphaga novaeseelandiae	Body Mass (g)	PMC6731707
+Hemiphaga novaeseelandiae	Body Mass (g)	PMC3654917
+Hemiphaga novaeseelandiae	Body Mass (g)	PMC7121861
+Hemiphaga novaeseelandiae	Brain Mass (g)	PMC7121861
+Aquila audax	Body Mass (g)	PMC11445450
+Aquila audax	Body Mass (g)	PMC11069563
+Aquila audax	Body Mass (g)	PMC9022800
+Aquila audax	Body Mass (g)	PMC11197000
+Aquila audax	Body Mass (g)	PMC9163195
+Aquila audax	Body Mass (g)	PMC10705787
+Aquila audax	Body Mass (g)	PMC10316125
+Aquila audax	Body Mass (g)	PMC7951828
+Aquila audax	Body Mass (g)	PMC8462277
+Aquila audax	Body Mass (g)	PMC3826236
+Aquila audax	Brain Mass (g)	PMC7687885
+Aquila audax	Brain Mass (g)	PMC7764213
+Aquila audax	Brain Mass (g)	PMC9771672
+Aquila audax	Brain Mass (g)	PMC5493918
+Aquila audax	Brain Mass (g)	PMC1495786
+Aquila audax	Brain Mass (g)	PMC7122709
+Aquila audax	Colonial	PMC9219548
+Aquila audax	Colonial	PMC7764213
+Aquila audax	Maximum colony size	PMC12334553
+Aquila audax	Maximum colony size	PMC11445450
+Aquila audax	Maximum colony size	PMC12177274
+Aquila audax	Maximum colony size	PMC9569340
+Aquila audax	Maximum colony size	PMC10861508
+Aquila audax	Maximum colony size	PMC5339730
+Aquila audax	Maximum colony size	PMC3817108
+Aquila audax	Maximum colony size	PMC7764213
+Aquila audax	Cooperative breeding	PMC7687885
+Aquila audax	Cooperative breeding	PMC4377648
+Aquila audax	Communal foraging	PMC7481692
+Aquila audax	Communal foraging	PMC7687885
+Aquila audax	Sociality outside of breeding	PMC4496073
+Aethia psittacula	Body Mass (g)	PMC9029723
+Aethia psittacula	Body Mass (g)	PMC7973763
+Aethia psittacula	Body Mass (g)	PMC1691389
+Aethia psittacula	Brain Mass (g)	PMC9029723
+Aethia psittacula	Maximum colony size	PMC8612468
+Aethia psittacula	Maximum colony size	PMC7973763
+Cygnus cygnus	Body Mass (g)	PMC12270885
+Cygnus cygnus	Body Mass (g)	PMC12537987
+Cygnus cygnus	Body Mass (g)	PMC12113756
+Cygnus cygnus	Body Mass (g)	PMC11773499
+Cygnus cygnus	Body Mass (g)	PMC11861175
+Cygnus cygnus	Body Mass (g)	PMC10904524
+Cygnus cygnus	Body Mass (g)	PMC12088674
+Cygnus cygnus	Body Mass (g)	PMC11255896
+Cygnus cygnus	Body Mass (g)	PMC12344420
+Cygnus cygnus	Body Mass (g)	PMC12064103
+Cygnus cygnus	Brain Mass (g)	PMC12150883
+Cygnus cygnus	Brain Mass (g)	PMC12537987
+Cygnus cygnus	Brain Mass (g)	PMC11773499
+Cygnus cygnus	Brain Mass (g)	PMC11861175
+Cygnus cygnus	Brain Mass (g)	PMC12389478
+Cygnus cygnus	Brain Mass (g)	PMC12064103
+Cygnus cygnus	Brain Mass (g)	PMC12475149
+Cygnus cygnus	Brain Mass (g)	PMC11389634
+Cygnus cygnus	Brain Mass (g)	PMC12291917
+Cygnus cygnus	Brain Mass (g)	PMC12570377
+Cygnus cygnus	Maximum colony size	PMC12113756
+Cygnus cygnus	Maximum colony size	PMC11182994
+Cygnus cygnus	Maximum colony size	PMC12088674
+Cygnus cygnus	Maximum colony size	PMC12114933
+Cygnus cygnus	Maximum colony size	PMC10895719
+Cygnus cygnus	Maximum colony size	PMC10756359
+Cygnus cygnus	Maximum colony size	PMC10647290
+Cygnus cygnus	Maximum colony size	PMC9860062
+Cygnus cygnus	Maximum colony size	PMC12031376
+Cygnus cygnus	Cooperative breeding	PMC10707585
+Cygnus cygnus	Cooperative breeding	PMC12303340
+Cygnus cygnus	Cooperative breeding	PMC12291917
+Larus glaucoides	Body Mass (g)	PMC9934386
+Larus glaucoides	Body Mass (g)	PMC9356949
+Larus glaucoides	Body Mass (g)	PMC8217904
+Larus glaucoides	Maximum colony size	PMC11565051
+Larus glaucoides	Maximum colony size	PMC12223544
+Larus glaucoides	Maximum colony size	PMC7052279
+Larus glaucoides	Maximum colony size	PMC6308878
+Larus glaucoides	Maximum colony size	PMC2993719
+Goura scheepmakeri	Body Mass (g)	PMC7122709
+Goura scheepmakeri	Brain Mass (g)	PMC7122709
+Turtur chalcospilos	Body Mass (g)	PMC11032286
+Turtur chalcospilos	Body Mass (g)	PMC8840882
+Turtur chalcospilos	Body Mass (g)	PMC5760208
+Turtur chalcospilos	Body Mass (g)	PMC4233402
+Turtur chalcospilos	Brain Mass (g)	PMC11032286
+Buteo lagopus	Body Mass (g)	PMC12229803
+Buteo lagopus	Body Mass (g)	PMC11850869
+Buteo lagopus	Body Mass (g)	PMC11773499
+Buteo lagopus	Body Mass (g)	PMC11988055
+Buteo lagopus	Body Mass (g)	PMC9745957
+Buteo lagopus	Body Mass (g)	PMC10701624
+Buteo lagopus	Body Mass (g)	PMC9817186
+Buteo lagopus	Body Mass (g)	PMC12020036
+Buteo lagopus	Body Mass (g)	PMC10975737
+Buteo lagopus	Body Mass (g)	PMC11083745
+Tachycineta bicolor	Body Mass (g)	PMC12406092
+Tachycineta bicolor	Body Mass (g)	PMC12588927
+Tachycineta bicolor	Body Mass (g)	PMC12612012
+Tachycineta bicolor	Body Mass (g)	PMC11680675
+Tachycineta bicolor	Body Mass (g)	PMC12530280
+Tachycineta bicolor	Body Mass (g)	PMC12280224
+Tachycineta bicolor	Body Mass (g)	PMC12271980
+Tachycineta bicolor	Body Mass (g)	PMC11415550
+Tachycineta bicolor	Body Mass (g)	PMC9992774
+Tachycineta bicolor	Body Mass (g)	PMC11512736
+Tachycineta bicolor	Brain Mass (g)	PMC12588927
+Tachycineta bicolor	Brain Mass (g)	PMC12406092
+Tachycineta bicolor	Brain Mass (g)	PMC12612012
+Tachycineta bicolor	Brain Mass (g)	PMC12286091
+Tachycineta bicolor	Brain Mass (g)	PMC11999856
+Tachycineta bicolor	Brain Mass (g)	PMC8989676
+Tachycineta bicolor	Brain Mass (g)	PMC11365322
+Tachycineta bicolor	Brain Mass (g)	PMC10008774
+Tachycineta bicolor	Brain Mass (g)	PMC6836416
+Tachycineta bicolor	Colonial	PMC12280224
+Tachycineta bicolor	Colonial	PMC11760022
+Tachycineta bicolor	Colonial	PMC12451488
+Tachycineta bicolor	Colonial	PMC10805381
+Tachycineta bicolor	Colonial	PMC11009423
+Tachycineta bicolor	Colonial	PMC7331019
+Tachycineta bicolor	Colonial	PMC7031495
+Tachycineta bicolor	Colonial	PMC6000146
+Tachycineta bicolor	Colonial	PMC4874346
+Tachycineta bicolor	Colonial	PMC3323641
+Tachycineta bicolor	Maximum colony size	PMC6722081
+Tachycineta bicolor	Maximum colony size	PMC10908177
+Tachycineta bicolor	Maximum colony size	PMC8084023
+Tachycineta bicolor	Maximum colony size	PMC7138727
+Tachycineta bicolor	Maximum colony size	PMC7744573
+Tachycineta bicolor	Maximum colony size	PMC8595685
+Tachycineta bicolor	Maximum colony size	PMC9234033
+Tachycineta bicolor	Maximum colony size	PMC7082000
+Tachycineta bicolor	Cooperative breeding	PMC12304448
+Tachycineta bicolor	Cooperative breeding	PMC10805381
+Tachycineta bicolor	Cooperative breeding	PMC11719028
+Tachycineta bicolor	Cooperative breeding	PMC8595685
+Tachycineta bicolor	Cooperative breeding	PMC7138727
+Tachycineta bicolor	Communal foraging	PMC7317827
+Tachycineta bicolor	Communal foraging	PMC6788579
+Tachycineta bicolor	Communal foraging	PMC4079691
+Tachycineta bicolor	Communal foraging	PMC2892874
+Tachycineta bicolor	Sociality outside of breeding	PMC7331019
+Tachycineta bicolor	Sociality outside of breeding	PMC6106170
+Tachycineta bicolor	Sociality outside of breeding	PMC4079691
+Gallinula ventralis	Body Mass (g)	PMC10705787
+Gallinula ventralis	Body Mass (g)	PMC7122709
+Gallinula ventralis	Habitat Type	PMC10705787
+Gallinula ventralis	Habitat Type	PMC3054018
+Gallinula ventralis	Habitat Type	PMC7122709
+Didunculus strigirostris	Body Mass (g)	PMC6558907
+Didunculus strigirostris	Brain Mass (g)	PMC6558907
+Calyptorhynchus lathami	Body Mass (g)	PMC7874632
+Calyptorhynchus lathami	Body Mass (g)	PMC10705787
+Calyptorhynchus lathami	Body Mass (g)	PMC7121861
+Calyptorhynchus lathami	Brain Mass (g)	PMC7874632
+Calyptorhynchus lathami	Brain Mass (g)	PMC7121861
+Calyptorhynchus lathami	Maximum colony size	PMC7874632
+Anas strepera	Body Mass (g)	PMC12364563
+Anas strepera	Body Mass (g)	PMC9488771
+Anas strepera	Body Mass (g)	PMC9795352
+Anas strepera	Body Mass (g)	PMC10705787
+Anas strepera	Body Mass (g)	PMC12016750
+Anas strepera	Body Mass (g)	PMC9449466
+Anas strepera	Body Mass (g)	PMC9104863
+Anas strepera	Body Mass (g)	PMC8732976
+Anas strepera	Body Mass (g)	PMC8182418
+Anas strepera	Body Mass (g)	PMC5906613
+Anas strepera	Brain Mass (g)	PMC9203021
+Anas strepera	Brain Mass (g)	PMC8732976
+Anas strepera	Brain Mass (g)	PMC5906613
+Anas strepera	Brain Mass (g)	PMC6675766
+Anas strepera	Brain Mass (g)	PMC7122709
+Anas strepera	Colonial	PMC11350681
+Anas strepera	Colonial	PMC11887621
+Anas strepera	Colonial	PMC10628658
+Anas strepera	Colonial	PMC11734989
+Anas strepera	Colonial	PMC12016750
+Anas strepera	Colonial	PMC11271962
+Anas strepera	Colonial	PMC2976637
+Anas strepera	Colonial	PMC3113761
+Anas strepera	Maximum colony size	PMC10647290
+Anas strepera	Maximum colony size	PMC10895719
+Anas strepera	Maximum colony size	PMC4168513
+Anas strepera	Maximum colony size	PMC3096498
+Anas strepera	Maximum colony size	PMC7163484

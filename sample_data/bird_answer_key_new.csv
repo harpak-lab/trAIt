@@ -1,0 +1,201 @@
+Species,Body Mass (g),Brain Mass (g),Colonial,Maximum colony size,Cooperative breeding,Communal foraging,Sociality outside of breeding,Migratory,Habitat_Type
+Charadrius mongolus,64.0,1.17068,No,,No,Solitary,Solitary,Yes,Coastal
+Streptopelia capicola,147.75,1.54364,No,,Unknown,Unknown,Unknown,Partially,Terrestrial
+Sturnus pagodarum,46.6,1.31677672,Facultative,unknown,No,Social,Social,Partially,Terrestrial
+Botaurus stellaris,1277.75,6.1,No,,No,Solitary,Solitary,Yes,Freshwater
+Phalacrocorax fuscescens,1420.0,9.21004,Colonial,2500 pairs,Unknown,Social,Social,No,Coastal
+Limnodromus scolopaceus,108.125,1.41932,No,,Unknown,Social,Social ,Yes,Freshwater
+Pachyptila belcheri,92.6,2.072,loose,Unknown,No,Social,Social,Yes,Sea
+Phapitreron amethystinus,145.0,1.33644,No,,Unknown,Facultative,In Pair / Solitary,No,Terrestrial
+Charadrius semipalmatus,52.0,0.99456,No,,No,Solitary,Solitary,Yes,Coastal
+Jacana jacana,108.25,1.28689848,No,,Yes,Solitary,Unknown,No,Freshwater
+Buteo magnirostris,276.0,4.72416,No,,No,Solitary,Solitary,No,Terrestrial
+Thalassoica antarctica,687.5,6.92048,Colonial,1000000,No,Social,Social,Partially,Sea
+Corvus coronoides,640.0,10.18388,No,,No,Facultative,Facultative,No,Terrestrial
+Ara ararauna,1125.0,18.73088,No,,No,Unknown,Unknown,No,Terrestrial
+Gyps fulvus,7436.0,26.0,Colonial,40,No,Social,Social,No,Terrestrial
+Pardirallus maculatus,173.0,1.95804,No,,No,Unknown,Unknown,No,Freshwater
+Pithecophaga jefferyi,5325.0,20.461,No,,No,In Pair / Solitary,Unknown,No,Terrestrial
+Phaenicophaeus superciliosus,122.25,2.60036,No,,No,Unknown,Unknown,No,Terrestrial
+Trichoglossus ornatus,120.0,3.63636,Unknown,Unknown,Unknown,Facultative,Facultative,Unknown,Terrestrial
+Xanthocephalus xanthocephalus,72.5,1.7094,Colonial,Unknown,No,Social,Social,Yes,Terrestrial
+Morus bassanus,2999.5,19.2,Colonial,"75,000 pairs",No,Social,Facultative,Yes,Coastal
+Macheiramphus alcinus,625.0,6.8376,No,,No,Solitary ,Solitary,No,Terrestrial
+Brotogeris chrysoptera,56.75,2.15488,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Aquila chrysaetos,4383.0,17.80884,No,,No,Facultative,Social,Partially,Terrestrial
+Amazona oratrix,434.83,8.93032,No,,No,Facultative,Facultative,No,Terrestrial
+Cerorhinca monocerata,505.0,4.79668,Colonial,70,Unknown,Social ,Social,No,Sea
+Larus argentatus,1085.0,6.93084,facultative,unknown,No,Social ,facultative,Partially ,Coastal
+Columbina passerina,35.0,0.66304,No,,No,In Pair / Solitary,In Pair / Solitary,No,Terrestrial
+Laterallus albigularis,44.5,1.07744,No,,No,Unknown,Unknown,No,Terrestrial
+Dromas ardeola,309.25,3.9,Colonial,1600,Unknown,Unknown,Unknown,Partially,Coastal
+Catoptrophorus semipalmatus,263.125,2.41388,No,,No,facultative,Social,Partially ,Coastal
+Andigena hypoglauca,315.5,4.8174,Unknown,Unknown,No,Facultative,Facultative,No,Terrestrial
+Cacatua leadbeateri,407.5,8.77492,No,,No,Social,Social,No,Terrestrial
+Pluvialis fulva,145.5,1.83372,No,,No,Solitary,Solitary,Yes,Terrestrial
+Phapitreron leucotis,110.325,1.17068,No,,No,Unknown,Unknown,No,Terrestrial
+Mulleripicus fulvus,200.0,4.58948,Unknown,Unknown,No,Unknown,Unknown,No,Terrestrial
+Psittacula derbiana,251.0,6.3196,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Tringa glareola,67.0,1.07744,No,,Unknown,Facultative,Facultative,Yes,Freshwater
+Aethia pusilla,85.0,1.53328,Colonial,>2 million,No,Social,Social,Unknown,Sea
+Actitis hypoleucos,48.0,0.8,No,,Unknown,facultative,Unknown,Yes,Freshwater
+Patagioenas speciosa,262.0,2.05128,No,,Unknown,Facultative,Facultative,No,Terrestrial
+Pyrrhura hoffmanni,80.35,3.626,No,,Unknown,Social,Social,No,Terrestrial
+Turtur brehmeri,119.25,1.36752,No,,Unknown,Unknown,Solitary/In Pair,No,Terrestrial
+Falco vespertinus,156.75,2.7972,Facultative,100s pairs,No,Social,Social,Yes,Terrestrial
+Corvus bennetti,396.25,6.67184,Colonial,unknown,No,Social,Social,No,Terrestrial
+Indicator minor,28.75,0.69412,No,,No,Facultative,Facultative,No,Terrestrial
+Branta leucopsis,1708.5,8.0,Colonial,Unknown,No,Social,Social,Partially,Coastal
+Zenaida macroura,119.0,1.23284,No,Unknown,Unknown,Social,Social,Partially,Terrestrial
+Ramphastos sulfuratus,430.0,5.03496,No,,No,Social,Social,No,Terrestrial
+Neochen jubata,1250.0,6.0088,No,,No,No,Social,No,Freshwater
+Plegadis chihi,583.75,5.22144,Colonial,10000 pairs,No,Social,Social,Yes,Freshwater
+Columba livia,320.0,2.268149,loose,small colonies,Unknown,Facultative,Facultative,No,Terrestrial
+Kaupifalco monogrammicus,278.0,4.17508,No,,No,Solitary ,Solitary,No,Terrestrial
+Gallicrex cinerea,352.3333333,2.65216,No,,No,,,Partially,Freshwater
+Aviceda subcristata,328.0,4.8692,No,,No,Solitary,Solitary,No,Terrestrial
+Pelecanus onocrotalus,9520.0,33.0,Colonial,large colonies,No,Facultative,Social,Yes,Freshwater
+Cacomantis flabelliformis,49.85,1.12924,No ,,No,Unknown,Unknown,Partially,Terrestrial
+Thinocorus orbignyianus,123.75,1.2,No,,Unknown,Facultative,Facultative,Partially,Terrestrial
+Tricholaema leucomelas,31.175,1.01528,No,,No,Unknown,Unknown,No,Terrestrial
+Poicephalus meyeri,116.75,4.56876,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Eos bornea,156.0,4.95208,No,,No,Social,Social ,No,Terrestrial
+Megalaima virens,202.0,2.2,No,,No,Facultative,Facultative,No,Terrestrial
+Neopsephotus bourkii,44.725,1.295,No,,No,Unknown,Unknown,No,Terrestrial
+Anas platyrhynchos,1121.0,5.63584,No,,No,Facultative,Social,Partially,Freshwater
+Rissa tridactyla,407.75,4.46516,Colonial,thousands,No,Social,Social,Partially ,Sea
+Cyanocitta cristata,85.25,3.02512,No,,No,Facultative,Facultative,Partially,Terrestrial
+Eunymphicus uvaeensis,130.0,3.44988,No,,No,Social,Social ,Unknown,Terrestrial
+Eudyptes chrysolophus,4825.0,13.0,Colonial,large colonies,Unknown,Social,Social,No,Coastal
+Ara severus,347.0,10.4118,No,,No,Unknown,Unknown,Unknown,Terrestrial
+Calidris alpina,54.6,1.036,No,,No,Unknown,facultative,Yes,Freshwater
+Melanitta perspicillata,1047.0,5.9052,Colonial,small colonies,Yes,Social,Social,Yes,Freshwater
+Fulica atra,775.0,2.9526,No,,No,Social,Social,Partially,Freshwater
+,,,,,,,,,
+Dendrocygna arborea,1150.0,6.0,loose,Unknown,Unknown,Social,Social,No,Freshwater
+Turnix pyrrhothorax,46.65,0.59052,No,,No,Facultative,Facultative,Partially,Terrestrial
+Larus leucophthalmus,330.0,3.2,Loose,hundreds ,Unknown,Social,Social,No,Coastal
+Mergellus albellus,630.0,4.4,Facultative,small colonies,No,Social,Social,Yes,Freshwater
+Larus marinus,1658.5,8.325142857,Loose ,Unknown,No,facultative,Social,Partially ,Coastal
+Anas querquedula,334.0,2.8,No,,Unknown,Unknown,Social,Yes,Freshwater
+Tigrisoma mexicanum,1160.0,7.0,No,,No,Solitary,Solitary,No,Freshwater
+Pygoscelis papua,5950.0,18.5,loose,small colonies,No,Social,Social,Partially,Coastal
+Turnix varius,96.5,1.07744,No,,No,Facultative,Facultative,Partially,Terrestrial
+Chen caerulescens,2630.75,11.06448,Colonial,thousands,Yes,Social,Social,Yes,Freshwater
+Ardea sumatrana,2024.0,9.04428,No,,No,Solitary,Solitary,No,Coastal
+Rostrhamus sociabilis,382.5833333,5.27324,Loose,,No,Solitary,Social,No,Freshwater
+Geopelia striata,46.97,0.81844,No,,Unknown,Facultative,Facultative,No,Terrestrial
+Jacana spinosa,116.15,1.42968,No,,No,Solitary,Solitary,No,Freshwater
+Dendrocygna autumnalis,826.5,4.7,Facultative,small colonies,No,Social,Social,Partially,Freshwater
+Spheniscus magellanicus,4000.0,17.3,Colonial,large colonies,No,Social,Social,Yes,Coastal
+Chenonetta jubata,812.5,4.22688,No,,No,Social,Social,No,Freshwater
+Fulica armillata,1060.0,4.16,No,,No,Social,Social,No,Freshwater
+Turtur afer,64.3,0.9,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Vanellus albiceps,192.0,2.46568,loose ,,Unknown,Social ,Social,Yes,Freshwater
+Numenius arquata,735.0,4.531784,No,,No,Facultative,Facultative,Partially,Coastal
+Porzana atra,77.5,1.31572,No,,No,Unknown,Unknown,No,Terrestrial
+Icterus pectoralis,46.5,1.33,No,,No,Facultative,Facultative,No,Terrestrial
+Forpus conspicillatus,26.1,1.2432,No,,No,Unknown,Unknown,Unknown,Terrestrial
+Morus serrator,2350.0,5.00388,Colonial,small colonies,Unknown,Social,Social,Partially,Coastal
+Melopsittacus undulatus,29.05,1.554,Colonial,Unknown,Unknown,Social,Social ,No,Terrestrial
+Spiziapteryx circumcincta,168.15,3.50168,No,,No,Solitary,Facultative,No,Terrestrial
+Mesophoyx intermedia,462.0,4.2994,Colonial,3000,No,,,No,Freshwater
+Gnorimopsar chopi,65.9,1.8648,Facultative,7 pairs,Yes,Social,Social,No,Terrestrial
+Calyptorhynchus banksii,723.6833334,12.3802,No,,No,Unknown,Unknown,No,Terrestrial
+Ducula pinon,756.0,3.91608,No,,Unknown,Facultative,Facultative,No,Terrestrial
+Treron formosae,140.0,1.6058,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Eubucco bourcierii,36.0,1.06708,No,,No,Facultative,Facultative,No,Terrestrial
+Bartramia longicauda,152.25,1.3468,No,,Unknown,Social,Social,Yes,Terrestrial
+Barnardius zonarius,127.0,4.05076,No,,No,Unknown,Unknown,No,Terrestrial
+Leptotila rufaxilla,157.0,1.31572,Unknown,Unknown,Unknown,Unknown,Unknown,No,Terrestrial
+Circus aeruginosus,607.0,5.766530909,No,,No,Solitary,Solitary,Yes,Freshwater
+Tanygnathus lucionensis,215.0,5.91556,No,,No,Unknown,Unknown,No,Terrestrial
+Aptenodytes patagonicus,12775.0,28.9044,Colonial,"300,000 pairs",Unknown,Social,Social,No,Coastal
+Prosopeia tabuensis,237.25,5.4908,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Ara macao,1015.0,18.57548,No,,No,Unknown,Unknown,No,Terrestrial
+Pluvialis squatarola,224.0,2.65216,No,,No,Solitary,Solitary,Yes,Coastal
+Lybius torquatus,53.2,1.20176,Colonial,7,No,Social,Social,No,Terrestrial
+Onychognathus salvadorii,147.75,2.52784,loose,unknown,Unknown,Social,Social,No,Terrestrial
+Microhierax fringillarius,42.9,1.2,No,,No,Social,Facultative,No,Terrestrial
+Poicephalus gulielmi,275.0,6.0088,No,,Unknown,Unknown,Social,No,Terrestrial
+Circaetus fasciolatus,1021.5,9.5,No,,No,Solitary,Solitary,No,Terrestrial
+Gallinago nobilis,192.5,2.25848,No,,Unknown,Unknown,Unknown,No,Freshwater
+Butastur indicus,397.0,5.18280756,No,,No,Solitary ,Solitary,Yes,Terrestrial
+Grus leucogeranus,5724.75,20.5,No,,No,Social,Social,Yes,Freshwater
+Phaetusa simplex,239.25,3.108,facultative,200,Unknown,Unknown,Unknown,No,Freshwater
+Phaenicophaeus tristis,115.0,2.3828,No,,No,Unknown,Unknown,No,Terrestrial
+Cheramoeca leucosterna,14.1,0.42476,Facultative,80 pairs,Unknown,Facultative,Facultative,No,Terrestrial
+Falco deiroleucus,481.0,2.856573,No,,No,Solitary/In Pair,Solitary/In Pair,No,Terrestrial
+Busarellus nigricollis,614.0,9.065,No,,No,Solitary,Solitary,No,Terrestrial
+Anas aucklandica,493.25,4.5584,No,,No,Unknown,Solitary,No,Coastal
+Centropus sinensis,283.0,4.753841,No,,No,Solitary,Solitary,No,Terrestrial
+Burhinus grallarius,667.9666667,4.46516,No,,Unknown,Unknown,Unknown,No,Terrestrial
+Anas eatoni,841.0,3.7296,No,,No,Unknown,Unknown,Unkown,Freshwater
+Hemiphaga novaeseelandiae,652.5,3.07692,No,,No,Facultative,In Pair / Solitary,No,Terrestrial
+Aquila audax,3466.0,16.82464,No,,No,Facultative,Social,No,Terrestrial
+Geotrygon lawrencii,220.0,1.8648,No,,Unknown,In Pair / Solitary,In Pair / Solitary,No,Terrestrial
+Aethia psittacula,270.0,2.6418,Loose,Unknown,No,facultative,Social,Unknown,Sea
+Cygnus cygnus,9413.0,20.202,No,,No,Social,Social,Yes,Freshwater
+Larus glaucoides,863.0,7.5,Colonial,6000,No,Social,Social ,Partially ,Coastal
+Goura scheepmakeri,2235.0,5.957,Unknown,Unknown,Unknown,Social,Social,No,Terrestrial
+Turtur chalcospilos,60.6,0.95312,No,,Unknown,Solitary/In Pair,Solitary/In Pair,No,Terrestrial
+Buteo lagopus,945.5,9.5312,No,,No,Solitary,Solitary,No,Terrestrial
+Gallinago undulata,313.0,2.99404,No,,Unknown,Unknown,Unknown,Unknown,Freshwater
+Tachycineta bicolor,20.8,0.5698,Facultative,Unknown,No,Social,Social,Yes,Terrestrial
+Gallinula ventralis,387.0,2.86972,Colonial,Unknown,Unknown,Social,Social,No,Freshwater
+Didunculus strigirostris,400.0,3.0,Unknown,Unknown,Unknown,Facultative,Facultative,Unknown,Terrestrial
+Calyptorhynchus lathami,431.975,10.13208,No,,No,Social,Social,No,Terrestrial
+Anas strepera,850.0,4.0404,No,,No,Social,Social,Yes,Freshwater
+Corvus brachyrhynchos,453.0,7.42812,No,,Facultative,Social,Social,Partially,Terrestrial
+Centropus bengalensis,159.3,2.35172,No,,No,Solitary,Solitary,No,Terrestrial
+Egretta thula,370.0,3.74,Colonial,thousands,No,Social,Social,Partially,Coastal
+Platycercus caledonicus,130.175,3.76068,No,,No,Unknown,Unknown,No,Terrestrial
+Picumnus innominatus,11.85,0.57408904,No,,No,Facultative,Facultative,No,Terrestrial
+Gyps himalayensis,10000.0,28.0,Colonial,32,Unknown,Social,Social,No,Terrestrial
+Daption capense,424.75,5.20072,loose,1000s pairs,No,Social,Social,Yes,Sea
+Charadrius alexandrinus,42.3,0.938218182,Colonial,192,No,Social,loose groups ,Yes,Coastal
+Cyanocorax affinis,212.5,4.51696,loose,unknown,Unknown,Social,Social,No,Terrestrial
+Hirundo ariel,11.025,0.37296,Colonial,hundreds,Facultative,Social,Social,Partially,Terrestrial
+Cepphus columba,487.0,4.0404,Colonial,1000,No,Solitary,Social,No,Sea
+Calidris melanotos,85.0,1.05672,No,,No,Solitary,Solitary,Yes,Coastal
+Recurvirostra novaehollandiae,324.675,2.06164,facultative,300,Unknown,Unknown,Unknown,Yes,Freshwater
+Butorides striata,198.0,2.56928,Facultative,100,No,Solitary,Solitary,No,Freshwater
+Falco longipennis,246.0,3.4706,No,,No,Solitary,Solitary,Partially,Terrestrial
+Accipiter haplochrous,240.5,4.05076,Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,Terrestrial
+Gypohierax angolensis,1600.0,10.49468,No,,No,Solitary ,Solitary,Partially,Terrestrial
+Neopsittacus musschenbroekii,57.0,2.5382,Unknown,Unknown,Unknown,Unknown,Unknown,Unknown,Terrestrial
+Bulweria bulwerii,99.5,1.38824,Colonial,1000s pairs,No,Solitary/In Pair,Solitary/In Pair,Yes,Sea
+Pandion haliaetus,1527.5,9.71768,No?,,No,Solitary,Solitary,Partially,Freshwater
+Elseyornis melanops,31.5,0.87024,No,,No,In Pair / Solitary,Unknown,No,Freshwater
+Tringa stagnatilis,75.25,1.05672,Facultative,Unknown,Unknown,Social,Social,Yes,Freshwater
+Coua caerulea,245.75,4.2,No,,No,Facultative,Facultative,No,Terrestrial
+Callocephalon fimbriatum,256.0,7.74928,No,,No,Unknown,Unknown,Yes,Terrestrial
+Psittacula cyanocephala,66.0,2.617653333,Colonial,Unknown,Unknown,Social,Social,No,Terrestrial
+Geotrygon montana,135.0,1.18104,No,,Unknown,In Pair / Solitary,In Pair / Solitary,No,Terrestrial
+Geotrygon costaricensis,254.0,1.9684,No,,Unknown,In Pair / Solitary,In Pair / Solitary,No,Terrestrial
+Dendropicos fuscescens,29.8,1.26392,No,,No,Facultative,Facultative,No,Terrestrial
+Limosa lapponica,311.5,2.86972,No,,Unknown,Facultative,Social,Yes,Coastal
+Larus hartlaubii,271.5,3.18052,Colonial,2000,Unknown,Unknown,Social ,No,Coastal
+Nestor meridionalis,429.0,11.484,No,,No,Unknown,Unknown,No,Terrestrial
+Aulacorhynchus sulcatus,171.0,2.83864,Unknown,Unknown,No,Facultative,Facultative,No,Terrestrial
+Aratinga acuticaudata,173.0,5.439,No,,No,Unknown,Unknown,No,Terrestrial
+Alle alle,160.0,2.1756,Colonial,thousands,No,Social,Social,Yes,Sea
+Polysticta stelleri,842.0,5.47008,No,,No,Social,Social,Yes,Freshwater
+Himantopus mexicanus,186.0,1.9684,facultative,9,No,Social,facultative,Yes,Freshwater
+Cyanocorax yncas,79.11667,2.4,No,,Yes,Social,Social,No,Terrestrial
+Diomedea exulans,7990.0,29.267,loose,"4,300 pairs",No,Social,Social,Partially,Sea
+Ducula bicolor,457.55,3.1598,Colonial,Unknown,Unknown,Social,Social,Partially,Coastal
+Neophron percnopterus,2039.333333,11.0,No,,No,facultative,Solitary,Partially,Terrestrial
+Loriculus galgulus,28.0,1.54364,No,,No,Unknown,Unknown,No,Terrestrial
+Pyrrhura melanura,70.6,3.39808,Unknown,Unknown,Unknown,Social,Social,No,Terrestrial
+Erythrogonys cinctus,51.0,1.0878,loose ,60,No,Social ,Unknown,No,Freshwater
+Enicognathus ferrugineus,166.95,5.51152,No,,No,Unknown,Unknown,No,Terrestrial
+Falco sparverius,115.5,2.57964,No,,No,Facultative,Facultative,Partially,Terrestrial
+Rostratula benghalensis,127.0,1.47112,No,,Unknown,facultative,Unknown,No,Freshwater
+Fregata minor,1400.0,9.56228,Colonial,1000s pairs,No,Facultative,Social,Partially,Coastal
+Columbina inca,48.75,0.75628,No,,No,Social,Social,No,Terrestrial
+Esacus giganteus,1012.5,6.1124,No,,No,Solitary,Unknown,No,Coastal
+Xenus cinereus,78.8,1.06708,No,,No,Social,Social,Yes,Coastal
+Hirundo rustica,19.0,0.5698,Facultative,30 nests,Yes,Facultative,Social,Yes,Terrestrial
+Anser albifrons,2387.5,9.41724,No,,No,Social,Social,Yes,Freshwater
+Ciconia boyciana,3538.0,20.9,Facultative,7 pairs,No,Facultative,Social,Yes,Freshwater
