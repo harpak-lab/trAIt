@@ -1,26 +1,28 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import pandas as pd
 
 ### OVERALL ACCURACIES ###
 
 average_species_accuracy = {
-    "Mixed Vertebrate": 0.572,
-    "Bird": 0.636,
-    "Frog": 0.183
+    "Mixed Vertebrate": 0.632,
+    "Bird": 0.703,
+    "Frog": 0.202
 }
 
 average_trait_accuracy = {
-    "Mixed Vertebrate": 0.628,
-    "Bird": 0.495,
-    "Frog": 0.784
+    "Mixed Vertebrate": 0.694,
+    "Bird": 0.547,
+    "Frog": 0.867
 }
 
 overall_accuracy = {
-    "Mixed Vertebrate": 0.730,
-    "Bird": 0.592,
-    "Frog": 0.298
+    "Mixed Vertebrate": 0.806,
+    "Bird": 0.654,
+    "Frog": 0.329
 }
+
 
 ### TRAIT ACCURACIES ###
 
@@ -175,7 +177,6 @@ frog_species_accuracy = {
 # #  FIGURE 4 — COMPARISON OF ALL SUMMARY ACCURACIES
 # # ============================================================
 
-# # Prepare data
 # datasets = ["Mixed Vertebrate", "Bird", "Frog"]
 
 # dataset_values = [overall_accuracy[d] for d in datasets]
@@ -201,27 +202,73 @@ frog_species_accuracy = {
 # plt.savefig("results/figure4_summary_accuracy.png", dpi=300)
 # plt.close()
 
-# print("All figures saved to results/")
-
 # ============================================================
 #  FIGURE 5 — OG MODEL VS CONSENSUS MODEL ACCURACY
 # ============================================================
 
-first_hit_accuracy = 0.417
-consensus_accuracy = 0.572
+# first_hit_accuracy = 0.484
+# consensus_accuracy = 0.632
 
-models = ["First-Hit Model", "Consensus Model"]
-values = [first_hit_accuracy, consensus_accuracy]
+# models = ["First-Hit Model", "Consensus Model"]
+# values = [first_hit_accuracy, consensus_accuracy]
 
-plt.figure(figsize=(6,5))
-plt.bar(models, values, color=["#C44E52", "#4C72B0"])
-plt.ylim(0,0.8)
-plt.ylabel("Accuracy")
-plt.title("Comparison of Model Accuracy: First-Hit vs Consensus")
+# plt.figure(figsize=(6,5))
+# plt.bar(models, values, color=["#C44E52", "#4C72B0"])
+# plt.ylim(0,0.8)
+# plt.ylabel("Accuracy")
+# plt.title("Comparison of Model Accuracy: First-Hit vs Consensus")
 
-for i, v in enumerate(values):
-    plt.text(i, v + 0.02, f"{v:.3f}", ha='center', fontsize=10)
+# for i, v in enumerate(values):
+#     plt.text(i, v + 0.02, f"{v:.3f}", ha='center', fontsize=10)
 
-plt.tight_layout()
-plt.savefig("results/figure5_model_comparison.png", dpi=300)
-plt.close()
+# plt.tight_layout()
+# plt.savefig("results/figure5_model_comparison.png", dpi=300)
+# plt.close()
+
+# ============================================================
+#  FIGURE 6 — MISSINGNESS HEATMAPS
+# ============================================================
+# hans_df = pd.read_csv("results/hans_output_results.csv")
+# bird_df = pd.read_csv("results/bird_output_results.csv")
+# frog_df = pd.read_csv("results/frog_output_results.csv")
+
+# datasets = {
+#     "Mixed Vertebrate": (hans_df, "results/figure6_missingness_hans.png"),
+#     "Bird": (bird_df, "results/figure6_missingness_bird.png"),
+#     "Frog": (frog_df, "results/figure6_missingness_frog.png")
+# }
+
+# def plot_trait_foundness(df, dataset_name, title, filename):
+#     trait_cols = df.columns[1:]
+#     found_percentages = {}
+
+#     for trait in trait_cols:
+#         col = df[trait]
+
+#         missing_mask = col.isna() | (col.astype(str).str.strip() == "")
+#         missing_percent = missing_mask.mean()
+
+#         found_percent = 1 - missing_percent
+#         found_percentages[trait] = found_percent
+
+#     traits_sorted = sorted(found_percentages, key=lambda x: found_percentages[x], reverse=True)
+#     values_sorted = [found_percentages[t] for t in traits_sorted]
+
+#     plt.figure(figsize=(10, 6))
+#     plt.bar(traits_sorted, values_sorted, color="#55A868")  # green = positive
+#     plt.xticks(rotation=75, ha="right")
+#     plt.ylim(0, 1)
+#     plt.ylabel("Proportion Found")
+#     plt.title(title)
+
+#     plt.tight_layout()
+#     plt.savefig(filename, dpi=300)
+#     plt.close()
+
+# for dataset_name, (df, filename) in datasets.items():
+#     plot_trait_foundness(
+#         df,
+#         dataset_name,
+#         f"Trait Extraction Completeness — {dataset_name} Dataset",
+#         filename
+#     )
