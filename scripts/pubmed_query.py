@@ -245,7 +245,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             
             # PUBMED API + GPT PIPELINE
             query = f"wild {species} AND {trait}"
-            pmcids = search_papers(query, max_results=10)
+            pmcids = search_papers(query, max_results=20)
 
             if not pmcids:
                 print(f"    No papers found for {species} {trait}")
