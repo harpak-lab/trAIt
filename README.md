@@ -46,7 +46,15 @@ The system demonstrates a general-purpose trait extraction pipeline.
    ```bash
    IUCN_API_KEY=your_iucn_api_key_here
    OPENAI_API_KEY=your_openai_api_key_here
+   
+   # Optional: Configure Model (Defaults to gpt-5-nano if not set)
+   LLM_MODEL=gpt-4o
+   
+   # Optional: Use a different provider (e.g., DeepSeek, OpenRouter, Localhost)
+   # OPENAI_BASE_URL=https://api.deepseek.com/v1
    ```
+
+   *Note: You can use any OpenAI-compatible provider (DeepSeek, OpenRouter, vLLM, Ollama) by setting the `OPENAI_BASE_URL` and `LLM_MODEL` variables.*
 
 4. Make sure you're on the main branch and inside the correct directory:
 

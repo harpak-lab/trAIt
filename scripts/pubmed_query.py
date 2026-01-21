@@ -10,9 +10,14 @@ from utils import get_iucn_assessment, search_papers, fetch_pdf, parse_llm_outpu
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+# Configuration
+LLM_MODEL = os.getenv("LLM_MODEL", "gpt-5-nano")
+
+
 def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_desc: str = ""):
     """Ask LLM to extract a single trait from a single paper."""
-    encoding = tiktoken.encoding_for_model("gpt-5-nano")
+    # Use generic encoding to avoid crashing on unknown model names from other providers
+    encoding = tiktoken.get_encoding("cl100k_base") 
     tokens = encoding.encode(paper_text)
     print(f"      Original paper length: {len(tokens)} tokens")
     max_allowed_tokens = 120000
@@ -57,7 +62,7 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     for attempt in range(5): # up to 5 tries
         try:
             response = client.chat.completions.create(
-                model="gpt-5-nano",
+                model=LLM_MODEL,
                 messages=[
                     {"role": "system", "content": "You are a helpful biology research assistant that extracts specific information from scientific papers."},
                     {"role": "user", "content": prompt}
@@ -107,7 +112,7 @@ Return your result in this exact format:
 
     try:
         response = client.chat.completions.create(
-            model="gpt-5-nano",
+            model=LLM_MODEL,
             messages=[
                 {"role": "system", "content": "You are a precise scientific summarizer."},
                 {"role": "user", "content": prompt}
@@ -195,7 +200,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     """)
 
                     response = client.chat.completions.create(
-                        model="gpt-5-nano",
+                        model=LLM_MODEL,
                         messages=[
                             {"role": "system", "content": "You are a helpful assistant that extracts factual data from structured JSON."},
                             {"role": "user", "content": iucn_prompt}
