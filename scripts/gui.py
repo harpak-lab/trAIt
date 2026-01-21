@@ -1,4 +1,5 @@
 import sys
+import os
 import pandas as pd
 
 from PyQt5.QtWidgets import (
@@ -142,7 +143,10 @@ class SpeciesTraitsApp(QWidget):
             layout.addWidget(label)
 
             image_label = QLabel()
-            pixmap = QPixmap(f"../sample_data/{filename}.png")
+            # Construct absolute path relative to this script file
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            image_path = os.path.join(script_dir, "..", "sample_data", f"{filename}.png")
+            pixmap = QPixmap(image_path)
             if not pixmap.isNull():
                 pixmap = pixmap.scaledToWidth(350, Qt.SmoothTransformation)
                 image_label.setPixmap(pixmap)
@@ -158,7 +162,7 @@ class SpeciesTraitsApp(QWidget):
 
     def show_sanity_loading(self):
         self.clear_layout()
-        loading_label = QLabel("Running Sanity Check...\n\nChecking literature availability for your traits.")
+        loading_label = QLabel("Running Trait Assessment...\n\nChecking literature availability for your traits.")
         loading_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(loading_label)
 
@@ -169,14 +173,14 @@ class SpeciesTraitsApp(QWidget):
         layout = QVBoxLayout(container)
 
         # Header
-        header = QLabel("<h2>Sanity Check Results</h2>")
+        header = QLabel("<h2>Trait Assessment Results</h2>")
         header.setAlignment(Qt.AlignCenter)
         layout.addWidget(header)
 
         # Explanation
         explanation = QLabel(
             "The <b>mean</b> indicates typical literature availability.<br>"
-            "The <b>range</b> (min, max) indicates consistency across species."
+            "The <b>range</b> (min-max) indicates consistency across species."
         )
         explanation.setAlignment(Qt.AlignCenter)
         layout.addWidget(explanation)
@@ -215,7 +219,7 @@ class SpeciesTraitsApp(QWidget):
                 color = "red"
 
             trait_label = QLabel(
-                f"<b>{trait}</b>: Mean = {mean_val:.1f}, Range = {range_val}"
+                f"<b>{trait}</b>: Mean = {mean_val:.1f}, Range = {range_val[0]}-{range_val[1]}"
             )
             scroll_layout.addWidget(trait_label)
         
