@@ -74,9 +74,9 @@ def fetch_pdf(pmcid: str):
         print(f"      Failed to fetch/parse PDF {pmcid}: {e}")
     return None
 
-def parse_gpt_output(gpt_output, trait):
-    """Parse GPT output to extract information for a single trait."""
-    lines = gpt_output.split('\n')
+def parse_llm_output(llm_output, trait):
+    """Parse LLM output to extract information for a single trait."""
+    lines = llm_output.split('\n')
     
     for line in lines:
         line = line.strip()
