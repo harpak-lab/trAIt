@@ -5,13 +5,13 @@ import pandas as pd
 import tiktoken
 import time
 from openai import RateLimitError
-from utils import get_iucn_assessment, search_papers, fetch_pdf, parse_gpt_output
+from utils import get_iucn_assessment, search_papers, fetch_pdf, parse_llm_output
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_desc: str = ""):
-    """Ask GPT to extract a single trait from a single paper."""
+    """Ask LLM to extract a single trait from a single paper."""
     encoding = tiktoken.encoding_for_model("gpt-5-nano")
     tokens = encoding.encode(paper_text)
     print(f"      Original paper length: {len(tokens)} tokens")
@@ -65,7 +65,7 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
                 max_completion_tokens=2000,
             )
             result = response.choices[0].message.content.strip()
-            print(f"GPT response: {result}")
+            print(f"LLM response: {result}")
             return result
 
         except RateLimitError as e:
@@ -79,7 +79,7 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
 
     return f"{trait}: N/A"
 
-def summarize_answers_with_gpt(species: str, trait: str, answers: list):
+def summarize_answers_with_llm(species: str, trait: str, answers: list):
     if not answers:
         return f"{trait}: N/A"
 
@@ -117,7 +117,7 @@ Return your result in this exact format:
 
         return response.choices[0].message.content.strip()
     except Exception as e:
-        print(f"    Consensus GPT error for {species} {trait}: {e}")
+        print(f"    Consensus LLM error for {species} {trait}: {e}")
         return f"{trait}: N/A"
 
 
@@ -171,7 +171,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             if trait_descriptions:
                 trait_desc = trait_descriptions.get(trait, "")
 
-            # IUCN + GPT PIPELINE
+            # IUCN + LLM PIPELINE
             if iucn_data:
                 try:
                     iucn_prompt = f"""
@@ -202,8 +202,8 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                         ],
                         max_completion_tokens=2000,
                     )
-                    gpt_output = response.choices[0].message.content.strip()
-                    value = parse_gpt_output(gpt_output, trait)
+                    llm_output = response.choices[0].message.content.strip()
+                    value = parse_llm_output(llm_output, trait)
                     if value not in ("N/A", "[N/A]", ""):
                         print(f"    IUCN found {trait}: {value}")
                         results.at[idx, trait] = value
@@ -211,9 +211,9 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     else:
                         print(f"    IUCN has no data for {trait}, moving to papers")
                 except Exception as e:
-                    print(f"    IUCN GPT extraction failed for {trait}: {e}")
+                    print(f"    IUCN LLM extraction failed for {trait}: {e}")
             
-            # PUBMED API + GPT PIPELINE
+            # PUBMED API + LLM PIPELINE
             query = f"wild {species} AND {trait}"
             pmcids = search_papers(query, max_results=20)
 
@@ -235,12 +235,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     f.write(f"{species}\t{trait}\t{pmcid}\n")
 
                 try:
-                    gpt_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
-                    value = parse_gpt_output(gpt_output, trait)
+                    llm_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
+                    value = parse_llm_output(llm_output, trait)
                     print(f"      Extracted value from paper {paper_idx + 1}: {value}")
 
                     if value not in ("N/A", "[N/A]", ""):
-                        # log successful papers (where GPT extracted a valid answer)
+                        # log successful papers (where LLM extracted a valid answer)
                         with open(successful_papers_log, "a") as f:
                             f.write(f"{species}\t{trait}\t{pmcid}\n")
                         answers.append(value)
@@ -248,13 +248,13 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                             print("      Collected 3 valid answers; stopping paper scan.")
                             break
                 except Exception as e:
-                    print(f"      GPT error for {species} {trait} paper {paper_idx + 1}: {e}")
+                    print(f"      LLM error for {species} {trait} paper {paper_idx + 1}: {e}")
 
             # consensus stage
             if answers:
                 print(f"    Collected answers for {trait}: {answers}")
-                consensus_output = summarize_answers_with_gpt(species, trait, answers)
-                final_value = parse_gpt_output(consensus_output, trait)
+                consensus_output = summarize_answers_with_llm(species, trait, answers)
+                final_value = parse_llm_output(consensus_output, trait)
                 results.at[idx, trait] = final_value
                 print(f"    Final consensus for {trait}: {final_value}")
             else:
