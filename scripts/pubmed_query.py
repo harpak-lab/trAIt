@@ -95,7 +95,9 @@ Here are the values found from different papers:
 {answers_text}
 
 Instructions:
-- If these values describe the same measurement or concept, reconcile or standardize them into one short answer.
+- If these values describe the same measurement or concept:
+  - If they are numerical and share the same unit, calculate the mean and uncertainty (half the range). Return as: "<mean> +/- <uncertainty> <unit>"
+  - Otherwise, reconcile them into one short answer.
 - If they are clearly different but all relevant, list all possible answers separated by commas.
 - If all are irrelevant or nonsensical, return "N/A".
 
@@ -121,38 +123,6 @@ Return your result in this exact format:
 
 def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
     """Main helper method to process species and traits lists through the pipeline."""
-
-    # ==============================
-    # Sanity Check: Trait Coverage
-    # ==============================
-    # bad_traits = []
-    # trait_avg_counts = {}
-
-    # for trait in traits_list:
-    #     print("Checking trait:", trait)
-    #     total_papers = 0
-    #     for species in species_list:
-    #         print("  Species:", species)
-    #         query = f"wild {species} AND {trait}"
-    #         pmcids = search_papers(query, max_results=20)
-    #         count = len(pmcids)
-    #         total_papers += count
-
-    #     avg_count = total_papers / len(species_list) if species_list else 0
-    #     trait_avg_counts[trait] = avg_count
-    #     if avg_count <= 5:
-    #         bad_traits.append((trait, avg_count))
-    
-    # print("\nTrait coverage summary:")
-    # for trait, avg in trait_avg_counts.items():
-    #     print(f" - {trait}: avg {avg:.2f} papers")
-
-    # if bad_traits:
-    #     print("Traits with low average paper count (<= 5):")
-    #     for trait, avg in bad_traits:
-    #         print(f"  - {trait} (avg: {avg:.2f})")
-    # else:
-    #     print("All traits returned sufficient papers.")
 
     start_time = time.time()
 
@@ -304,3 +274,31 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     print(f"\nTotal processing time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
 
     return results
+
+def sanity_check(species_list: list, traits_list: list):
+    trait_stats = {}
+
+    for trait in traits_list:
+        print("Checking trait:", trait)
+        counts = []
+
+        for species in species_list:
+            print("  Species:", species)
+            query = f"wild {species} AND {trait}"
+            pmcids = search_papers(query, max_results=20)
+            count = len(pmcids)
+            counts.append(count)
+
+        if counts:
+            mean_count = sum(counts) / len(counts)
+            min_count = min(counts)
+            max_count = max(counts)
+        else:
+            mean_count = min_count = max_count = 0
+
+        trait_stats[trait] = {
+            "mean": mean_count,
+            "range": (min_count, max_count)
+        }
+
+    return trait_stats
