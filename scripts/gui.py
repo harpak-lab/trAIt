@@ -197,15 +197,6 @@ class SpeciesTraitsApp(QWidget):
         for trait, stats in trait_stats.items():
             mean_val = stats['mean']
             std_dev_val = stats['std_dev']
-            
-            # Color code based on mean
-            color = "black"
-            if mean_val >= 10:
-                color = "green"
-            elif mean_val >= 3:
-                color = "orange"
-            else:
-                color = "red"
 
             trait_label = QLabel(
                 f"<b>{trait}</b>: Mean = {mean_val:.1f}, Std Dev = {std_dev_val:.1f}"
