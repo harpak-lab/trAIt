@@ -180,21 +180,10 @@ class SpeciesTraitsApp(QWidget):
         # Explanation
         explanation = QLabel(
             "The <b>mean</b> indicates typical literature availability.<br>"
-            "The <b>range</b> (min-max) indicates consistency across species."
+            "The <b>standard deviation</b> (std dev) indicates variability across species."
         )
         explanation.setAlignment(Qt.AlignCenter)
         layout.addWidget(explanation)
-        
-        # Guidelines
-        guidelines = QLabel(
-            "<b>Guidelines:</b><br>"
-            "&ge; 10 papers: Good<br>"
-            "3-7 papers: Okay<br>"
-            "&lt; 3 papers: Bad (Review trait name or drop)"
-        )
-        guidelines.setAlignment(Qt.AlignCenter)
-        guidelines.setWordWrap(True)
-        layout.addWidget(guidelines)
 
         # Force window resize to fit content - removed fixed height, use min width
         self.setMinimumWidth(600)
@@ -207,7 +196,7 @@ class SpeciesTraitsApp(QWidget):
 
         for trait, stats in trait_stats.items():
             mean_val = stats['mean']
-            range_val = stats['range']
+            std_dev_val = stats['std_dev']
             
             # Color code based on mean
             color = "black"
@@ -219,7 +208,7 @@ class SpeciesTraitsApp(QWidget):
                 color = "red"
 
             trait_label = QLabel(
-                f"<b>{trait}</b>: Mean = {mean_val:.1f}, Range = {range_val[0]}-{range_val[1]}"
+                f"<b>{trait}</b>: Mean = {mean_val:.1f}, Std Dev = {std_dev_val:.1f}"
             )
             scroll_layout.addWidget(trait_label)
         

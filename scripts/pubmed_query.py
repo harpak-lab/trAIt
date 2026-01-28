@@ -281,6 +281,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     return results
 
 def sanity_check(species_list: list, traits_list: list):
+    import statistics
     trait_stats = {}
 
     for trait in traits_list:
@@ -296,14 +297,17 @@ def sanity_check(species_list: list, traits_list: list):
 
         if counts:
             mean_count = sum(counts) / len(counts)
-            min_count = min(counts)
-            max_count = max(counts)
+            if len(counts) > 1:
+                std_dev = statistics.stdev(counts)
+            else:
+                std_dev = 0.0
         else:
-            mean_count = min_count = max_count = 0
+            mean_count = 0.0
+            std_dev = 0.0
 
         trait_stats[trait] = {
             "mean": mean_count,
-            "range": (min_count, max_count)
+            "std_dev": std_dev
         }
 
     return trait_stats
