@@ -1,4 +1,4 @@
-# Simplified orchestrator: reads species from XLSX, fetches AmphibiaWeb sources,
+# Simplified orchestrator: reads species from CSV, fetches AmphibiaWeb sources,
 # uses GPT to extract 5 specific traits, and writes CSV.
 
 import os
@@ -13,7 +13,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # one level up from /scripts
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, "..", ".env"))  # load .env from module root
 
-INPUT_XLSX = os.path.join(BASE_DIR, "data", "Froggy_Spreadsheet.xlsx")
+INPUT_CSV = os.path.join(BASE_DIR, "data", "frog_case_study_species.csv")
 OUTPUT_CSV = os.path.join(BASE_DIR, "results", "amphibiaweb_traits.csv")
 
 # Trait descriptions for GPT prompts
@@ -50,7 +50,7 @@ def _gpt_extract_trait(species: str, trait: str, description: str, xml_text: str
     for attempt in range(5):
         try:
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="gpt-5-nano",
                 messages=[
                     {"role": "system", "content": "You extract concise biological traits from noisy text."},
                     {"role": "user", "content": prompt},
@@ -58,7 +58,8 @@ def _gpt_extract_trait(species: str, trait: str, description: str, xml_text: str
                 max_completion_tokens=1000,
             )
             return (resp.choices[0].message.content or "").strip()
-        except Exception:
+        except Exception as e:
+            print("exception: ", e)
             # silent backoff to keep minimal output
             pass
     return f"{trait}: N/A"
@@ -90,6 +91,7 @@ def extract_amphibiaweb_traits_simple(species: str, xml_text: str) -> dict:
 
     # Extract each trait with its description
     for trait, description in TRAIT_DESCRIPTIONS.items():
+        print("Processing trait: ", trait)
         result = _gpt_extract_trait(species, trait, description, xml_text)
         out[trait] = _strip_after_colon(result)
 
@@ -98,12 +100,12 @@ def extract_amphibiaweb_traits_simple(species: str, xml_text: str) -> dict:
 
 # ------------------------------ Main Pipeline -----------------------------
 
-def run_pipeline(input_xlsx: str = INPUT_XLSX,
+def run_pipeline(input_csv: str = INPUT_CSV,
                  output_csv: str = OUTPUT_CSV):
     """Read species from Excel, extract AmphibiaWeb traits, write to CSV."""
     
-    # Read the Excel file - single sheet with "Species" column
-    df_src = pd.read_excel(input_xlsx)
+    # read csv file
+    df_src = pd.read_csv(input_csv)
     
     if "Species" not in df_src.columns:
         raise ValueError("Expected 'Species' column in input Excel file.")
