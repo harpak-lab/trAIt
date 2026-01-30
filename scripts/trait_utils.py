@@ -163,3 +163,25 @@ def collect_climate_arrays(location_names: list[str],
         if r is not None:
             rains.append(r)
     return temps, rains
+
+def get_cckp_raw_json(location_names: list[str], 
+                      geonames_file: str = None) -> dict | None:
+    """Return combined raw CCKP JSON for all location codes."""
+    if geonames_file is None:
+        geonames_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "geonames.xlsx")
+    
+    codes = find_location_codes(location_names, geonames_file)
+    if not codes:
+        return None
+    
+    combined_data = {"data": {"tas": {}, "pr": {}}}
+    
+    for code in codes:
+        data = _cckp_get(code)
+        if data and "data" in data:
+            if "tas" in data["data"]:
+                combined_data["data"]["tas"].update(data["data"]["tas"])
+            if "pr" in data["data"]:
+                combined_data["data"]["pr"].update(data["data"]["pr"])
+    
+    return combined_data if combined_data["data"]["tas"] or combined_data["data"]["pr"] else None
