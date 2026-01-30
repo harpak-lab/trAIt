@@ -1,0 +1,2 @@
+Body Mass: Return only a single numeric value measured in grams, but omit the unit in the output.
+Brain Mass: Return only a single numeric value measured in grams, but omit the unit in the output.
