@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # one le
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, "..", ".env"))  # load .env from module root
 
 INPUT_CSV = os.path.join(BASE_DIR, "data", "frog_case_study_species.csv")
-OUTPUT_CSV = os.path.join(BASE_DIR, "results", "amphibiaweb_traits.csv")
+OUTPUT_CSV = os.path.join(BASE_DIR, "results", "frog_case_study_results.csv")
 
 # Trait descriptions for GPT prompts
 TRAIT_DESCRIPTIONS = {
