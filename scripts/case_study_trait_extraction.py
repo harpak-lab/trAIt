@@ -38,7 +38,7 @@ TRAIT_DESCRIPTIONS = {
 def _gpt_extract_trait(species: str, trait: str, description: str, xml_text: str) -> str:
     """Extract a single trait using GPT with the specified template."""
     if not xml_text:
-        return "N/A"
+        return ""
 
     prompt = f"""Extract information about the species {species} from the following research paper.
     Focus specifically on the trait: {trait}: {description}
@@ -70,16 +70,16 @@ def _gpt_extract_trait(species: str, trait: str, description: str, xml_text: str
             print("exception: ", e)
             # silent backoff to keep minimal output
             pass
-    return f"{trait}: N/A"
+    return f"{trait}: "
 
 
 def _strip_after_colon(result: str) -> str:
-    """Return the value after 'trait:' or 'N/A'."""
+    """Return the value after 'trait:' or ''."""
     if not isinstance(result, str):
-        return "N/A"
+        return ""
     parts = result.split(":", 1)
     val = parts[1].strip() if len(parts) > 1 else result.strip()
-    return val if val else "N/A"
+    return val if val else ""
 
 
 # -------------------------- extraction ------------------------
@@ -87,14 +87,14 @@ def _strip_after_colon(result: str) -> str:
 def extract_all_traits(species: str, xml_text: str, iucn_json: dict, cckp_json: dict) -> dict:
     """Extract 8 traits from AmphibiaWeb XML, IUCN JSON, and CCKP JSON using GPT."""
     out = {
-        "Egg Style": "N/A",
-        "Egg Clutch": "N/A",
-        "Snout-Vent Length Male": "N/A",
-        "Snout-Vent Length Female": "N/A",
-        "Average Snout-Vent Length Adult": "N/A",
-        "Average Altitude": "N/A",
-        "Average Temperature": "N/A",
-        "Average Rainfall": "N/A",
+        "Egg Style": "",
+        "Egg Clutch": "",
+        "Snout-Vent Length Male": "",
+        "Snout-Vent Length Female": "",
+        "Average Snout-Vent Length Adult": "",
+        "Average Altitude": "",
+        "Average Temperature": "",
+        "Average Rainfall": "",
     }
     
     # Extract AmphibiaWeb traits
@@ -176,6 +176,12 @@ def run_pipeline(input_csv: str = INPUT_CSV,
         record.update(traits)
 
         results.append(record)
+
+        # Auto-save every 10 species
+        if len(results) % 10 == 0:
+            df_output = pd.DataFrame(results)
+            df_output.to_csv(output_csv, index=False)
+            print(f"Auto-saved {len(results)} species to {output_csv}")
 
     # Write results to CSV
     df_output = pd.DataFrame(results)
