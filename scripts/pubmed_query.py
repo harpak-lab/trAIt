@@ -19,7 +19,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     # Use generic encoding to avoid crashing on unknown model names from other providers
     encoding = tiktoken.get_encoding("cl100k_base") 
     tokens = encoding.encode(paper_text)
-    print(f"      Original paper length: {len(tokens)} tokens")
     max_allowed_tokens = 120000
     if len(tokens) > max_allowed_tokens:
         tokens = tokens[:max_allowed_tokens]
@@ -44,21 +43,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
     {truncated_text}
     """
 
-    # debugging purposes
-    print(f"""
-    Extract information about the species {species} from the following research paper.
-    Focus specifically on the trait: {trait}{desc_part}
-
-    Return only the key fact(s), in the fewest possible words.
-    Do not write full sentences, explanations, or background.
-    Output should be just the essential data points (e.g., "10 cm", "desert habitats").
-    If no information is found, respond with "N/A".
-
-    Format your response EXACTLY as:
-    {trait}: [short fact(s)]
-    """
-    )
-
     for attempt in range(5): # up to 5 tries
         try:
             response = client.chat.completions.create(
@@ -70,7 +54,6 @@ def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_de
                 max_completion_tokens=2000,
             )
             result = response.choices[0].message.content.strip()
-            print(f"LLM response: {result}")
             return result
 
         except RateLimitError as e:
@@ -163,10 +146,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
         # grab iucn
         genus, sp = species.split(" ", 1) if " " in species else (species, "")
         iucn_data = get_iucn_assessment(genus, sp)
-        if iucn_data:
-            print("  Retrieved IUCN data.")
-        else:
-            print("  No IUCN data found.")
 
         for trait in traits_list:
             print(f"  Processing trait: {trait}")
@@ -192,13 +171,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     {iucn_data}
                     """
 
-                    # debugging
-                    print(f"""
-                    Extract the value of the trait "{trait}" for the species {species}
-                    from the following IUCN Red List JSON data.
-                    {trait}: {trait_desc}
-                    """)
-
                     response = client.chat.completions.create(
                         model=LLM_MODEL,
                         messages=[
@@ -210,11 +182,8 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                     llm_output = response.choices[0].message.content.strip()
                     value = parse_llm_output(llm_output, trait)
                     if value not in ("N/A", "[N/A]", ""):
-                        print(f"    IUCN found {trait}: {value}")
                         results.at[idx, trait] = value
                         continue  # skip to next trait
-                    else:
-                        print(f"    IUCN has no data for {trait}, moving to papers")
                 except Exception as e:
                     print(f"    IUCN LLM extraction failed for {trait}: {e}")
             
@@ -230,7 +199,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             answers = []  # store up to 3 valid extracted answers
 
             for paper_idx, pmcid in enumerate(pmcids[:20]):  # check up to 20 papers
-                print(f"    Trying paper {paper_idx + 1}/{min(20, len(pmcids))} for {trait}")
+                # print(f"    Trying paper {paper_idx + 1}/{min(20, len(pmcids))} for {trait}")
                 paper_text = fetch_pdf(pmcid)
                 if not paper_text:
                     continue
@@ -242,7 +211,7 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 try:
                     llm_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
                     value = parse_llm_output(llm_output, trait)
-                    print(f"      Extracted value from paper {paper_idx + 1}: {value}")
+                    # print(f"      Extracted value from paper {paper_idx + 1}: {value}")
 
                     if value not in ("N/A", "[N/A]", ""):
                         # log successful papers (where LLM extracted a valid answer)
@@ -250,21 +219,17 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                             f.write(f"{species}\t{trait}\t{pmcid}\n")
                         answers.append(value)
                         if len(answers) >= 3:
-                            print("      Collected 3 valid answers; stopping paper scan.")
                             break
                 except Exception as e:
                     print(f"      LLM error for {species} {trait} paper {paper_idx + 1}: {e}")
 
             # consensus stage
             if answers:
-                print(f"    Collected answers for {trait}: {answers}")
                 consensus_output = summarize_answers_with_llm(species, trait, answers)
                 final_value = parse_llm_output(consensus_output, trait)
                 results.at[idx, trait] = final_value
-                print(f"    Final consensus for {trait}: {final_value}")
             else:
                 results.at[idx, trait] = ""
-                print(f"    No valid information found for {trait} after {len(pmcids)} papers")
             
         # save results
         results.to_csv(output_path, index=False)
@@ -276,11 +241,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     total_time = end_time - start_time
     hours, rem = divmod(total_time, 3600)
     minutes, seconds = divmod(rem, 60)
-    print(f"\nTotal processing time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
+    # print(f"\nTotal processing time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
 
     return results
 
 def sanity_check(species_list: list, traits_list: list):
+    import statistics
     trait_stats = {}
 
     for trait in traits_list:
@@ -296,14 +262,17 @@ def sanity_check(species_list: list, traits_list: list):
 
         if counts:
             mean_count = sum(counts) / len(counts)
-            min_count = min(counts)
-            max_count = max(counts)
+            if len(counts) > 1:
+                std_dev = statistics.stdev(counts)
+            else:
+                std_dev = 0.0
         else:
-            mean_count = min_count = max_count = 0
+            mean_count = 0.0
+            std_dev = 0.0
 
         trait_stats[trait] = {
             "mean": mean_count,
-            "range": (min_count, max_count)
+            "std_dev": std_dev
         }
 
     return trait_stats
