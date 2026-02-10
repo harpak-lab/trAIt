@@ -63,10 +63,10 @@ The system demonstrates a general-purpose trait extraction pipeline.
    cd scripts
    ```
 
-5. Run the GUI script:
+5. Run the trAIt script:
 
    ```bash
-   python3 gui.py
+   python3 trAIt.py
    ```
 
 6. In the popup window:
