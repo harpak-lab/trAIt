@@ -1,26 +1,28 @@
-# Species Trait Data Compilation
+# trAIt: Species-by-Trait Data Retrieval using Large Language Models
 
-This project automates the retrieval and compilation of species-specific biological trait data by integrating biodiversity APIs with large language models. It is designed to scale from focused case studies to generalized, cross-species analyses.
+trAIt is a publicly-available software for the retrieval of species characteristics from scientific literature catalogued in the Europe PubMed Central (PubMed) database. Using a large language model (LLM), trAIt retrieves papers, synthesizes their content using a consensus-based model, and outputs a species-by-characteristic table.
 
 ---
 
-## Generalized Data Pipeline
+## Overview
 
-The system demonstrates a general-purpose trait extraction pipeline.  
-- Uses Europe PMC / PubMed Central (PMC) to query scientific literature  
-- Retrieves PDFs, parses them, and applies LLM-based extraction prompts to pull out traits such as diet, size, habitat, or environmental associations  
-- Works for any list of species and any set of traits, driven by an Excel file and trait description mapping  
-- Provides a UI for easy use, supporting batch processing across taxa  
+trAIt:
+- Queries the PubMed open-access API to retrieve scientific papers for each species-trait pair
+- Uses a configurable LLM chatbot to extract trait values from each paper
+- Applies a consensus mechanism to reconcile results from multiple papers
+- Outputs trait values in a structured CSV file
+
+trAIt works for any list of species and any set of traits, with a graphical user interface that allows users to upload input files and run trAIt without writing code.
 
 ---
 
 ## How to Use
 
-1. Clone the repository (if not already done):
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/harpak-lab/Data-Compilation-Model.git
-   cd Data-Compilation-Model
+   git clone https://github.com/harpak-lab/trAIt.git
+   cd trAIt
    ```
 
 2. Install dependencies:
@@ -31,15 +33,15 @@ The system demonstrates a general-purpose trait extraction pipeline.
 
 3. Configure API Keys:
 
-   This project requires API keys for IUCN Red List and OpenAI GPT to retrieve species traits and run extraction.
+   trAIt requires API keys for IUCN Red List (optional, for supplementary structured data) and an LLM chatbot provider.
 
-   **IUCN Red List API**
+   **IUCN Red List API (Optional)**
    
    Go to https://api.iucnredlist.org/ and create an account to generate a new API key.
 
-   **OpenAI GPT**
+   **LLM Chatbot API**
    
-   Sign up or login at https://platform.openai.com/ to get an API key.
+   Sign up or login at https://platform.openai.com/ to get an API key. Alternatively, you can use any OpenAI-compatible provider.
 
    **Add keys to a .env file in the project root (same folder as requirements.txt).**
 
@@ -66,16 +68,41 @@ The system demonstrates a general-purpose trait extraction pipeline.
 5. Run the GUI script:
 
    ```bash
-   python3 gui.py
+   python3 trAIt.py
    ```
 
 6. In the popup window:
-   - Upload your Excel file: first column = species, remaining columns = traits.
-   - Upload your trait descriptions text file: UTF-8 encoded; each line in the format **trait: description**.
+   - Upload your spreadsheet (CSV or Excel): first column = species names, remaining columns = traits of interest
+   - Upload your trait descriptions text file: UTF-8 encoded; each line in the format **trait: description**
 
-7. Start extraction:
-   - Click **Start Data Extraction**.
-   - The system will query APIs, fetch papers, and extract trait data.
-   - Results will be saved to:
-   Data-Compilation-Model/02_generic_data_compilation/results/
+7. Review trait quality assessment:
+   - trAIt will display the mean and standard deviation of papers pulled for each trait, across species
+   - Proceed with extraction or revise your trait names based on these results
 
+8. Start extraction:
+   - Click **Proceed with Extraction**
+   - trAIt will query the PubMed API, retrieve papers, and extract trait information
+   - Results will be saved to: trAIt/results/
+
+---
+
+## Input Requirements
+
+**Spreadsheet File (CSV or Excel):**
+- First column: species names (e.g., "Mus musculus")
+- Subsequent columns: trait names (e.g., "Body Size", "Habitat", "Diet")
+
+**Trait Descriptions File (plain text, UTF-8):**
+- Each line should contain: trait_name: description
+- For categorical traits, include all possible category labels in the description
+- Example: "Mating System: The structure of social and sexual interactions of reproduction. Options are Monogamous, Polygynous, Polyandrous, Polygamous, and Promiscuous."
+
+---
+
+## Output
+
+trAIt generates three files in the results directory:
+
+1. **output_results.csv**: A species-by-trait table with extracted values
+2. **all_papers.txt**: Log of all papers retrieved for each species-trait pair
+3. **successful_papers.txt**: Log of papers where trAIt extracted non-missing trait values
