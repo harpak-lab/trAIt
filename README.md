@@ -16,6 +16,18 @@ trAIt works for any list of species and any set of traits, with a graphical user
 
 ---
 
+## Prerequisites
+
+- **Python 3.10 or higher** — this tool uses Python features that are not available in earlier versions. You can check your version with:
+
+  ```bash
+  python3 --version
+  ```
+
+  If you need to upgrade, download the latest Python from [python.org](https://www.python.org/downloads/).
+
+---
+
 ## How to Use
 
 1. Clone the repository:

@@ -1,3 +1,4 @@
+# Requires Python 3.10+
 pandas
 PyQt5
 requests
