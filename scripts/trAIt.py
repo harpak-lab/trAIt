@@ -219,7 +219,7 @@ class SpeciesTraitsApp(QWidget):
 
     def show_sanity_loading(self):
         self.clear_layout()
-        loading_label = QLabel("Running Paper Availability Check...\n\nChecking literature availability for your traits and species.")
+        loading_label = QLabel("Running Literature Availability Assessment...\n\nChecking literature availability for your traits and species.")
         loading_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(loading_label)
 
@@ -230,7 +230,7 @@ class SpeciesTraitsApp(QWidget):
         layout = QVBoxLayout(container)
 
         # Header
-        header = QLabel("<h2>Paper Availability Check Results</h2>")
+        header = QLabel("<h2>Literature Availability Results</h2>")
         header.setAlignment(Qt.AlignCenter)
         layout.addWidget(header)
 
