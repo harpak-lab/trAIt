@@ -6,16 +6,17 @@ from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QVBoxLayout,
     QMessageBox, QFileDialog,
     QTabWidget,
-    QSpacerItem, QSizePolicy, QScrollArea
+    QSpacerItem, QSizePolicy, QScrollArea, QProgressBar
 )
-from PyQt5.QtCore import Qt, QThread, pyqtSignal
-from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, QRect
+from PyQt5.QtGui import QPixmap, QFont, QPainter, QColor
+from PyQt5.QtWidgets import QStyleOptionProgressBar, QStyle
 from pubmed_query import process_species_traits, sanity_check
 
 
 # Worker thread for Sanity Check
 class SanityCheckWorker(QThread):
-    finished = pyqtSignal(dict)
+    finished = pyqtSignal(object)  # emits (trait_stats, species_stats) tuple
 
     def __init__(self, species_list, traits_list):
         super().__init__()
@@ -30,6 +31,7 @@ class SanityCheckWorker(QThread):
 # Worker thread
 class ExtractionWorker(QThread):
     finished = pyqtSignal(str)
+    progress = pyqtSignal(int, int)  # (species_done, species_total)
 
     def __init__(self, species_list, traits_list, trait_descriptions, file_name):
         super().__init__()
@@ -41,9 +43,59 @@ class ExtractionWorker(QThread):
     def run(self):
         process_species_traits(
             self.species_list, self.traits_list,
-            self.file_name, self.trait_descriptions
+            self.file_name, self.trait_descriptions,
+            progress_callback=lambda done, total: self.progress.emit(done, total)
         )
         self.finished.emit(self.file_name)
+
+
+class TrailingLabelProgressBar(QProgressBar):
+    """Progress bar with the % label floating above the fill edge."""
+
+    LABEL_AREA = 22  # pixels above the bar reserved for the text
+
+    def paintEvent(self, event):
+        # Draw the standard bar (chunk + background) but suppress built-in text
+        opt = QStyleOptionProgressBar()
+        self.initStyleOption(opt)
+        opt.text = ""           # hide default centered text
+        opt.textVisible = False
+        painter = QPainter(self)
+        self.style().drawControl(QStyle.CE_ProgressBar, opt, painter, self)
+
+        # Calculate fill width
+        total = self.maximum() - self.minimum()
+        if total <= 0:
+            return
+        ratio = (self.value() - self.minimum()) / total
+        fill_w = int(self.width() * ratio)
+
+        pct = int(ratio * 100)
+        label = f"{pct}%"
+
+        fm = painter.fontMetrics()
+        text_w = fm.horizontalAdvance(label)
+        text_h = fm.height()
+        margin = 6
+
+        # Place text just inside the right edge of the filled area
+        # If fill is too narrow to fit, place it just to the right of the fill
+        x = max(fill_w - text_w - margin, fill_w + margin)
+        if fill_w - text_w - margin >= margin:
+            x = fill_w - text_w - margin  # inside the fill
+        else:
+            x = fill_w + margin            # outside the fill (unfilled region)
+
+        y = (self.height() + text_h) // 2 - fm.descent()
+
+        # Pick contrasting color
+        if x < fill_w:
+            painter.setPen(QColor("white"))
+        else:
+            painter.setPen(self.palette().text().color())
+
+        painter.drawText(x, y, label)
+        painter.end()
 
 
 class SpeciesTraitsApp(QWidget):
@@ -126,6 +178,11 @@ class SpeciesTraitsApp(QWidget):
         <h3>How to Use</h3>
         <p>1. Prepare an Excel or CSV file with the first column as <b>species names</b> 
         and the remaining columns as <b>traits</b>.</p>
+        <ul>
+            <li>Note: trait names should use plain spaces - no underscores, periods, or special characters. 
+            Format them as if you were typing the trait into a Google search bar 
+            (e.g., <i>body mass</i>, not <i>body_mass</i> or <i>body.mass</i>).</li>
+        </ul>
         <p>2. Prepare a text file (.txt, UTF-8 encoded) listing each trait followed by a colon and its description.</p>
         <p>3. Upload both files under the <b>Upload</b> tab and click <b>Start Data Extraction</b>.</p>
         <p>The processed CSV file will be saved as <b>output_results.csv</b> in a results directory.</p>
@@ -162,63 +219,77 @@ class SpeciesTraitsApp(QWidget):
 
     def show_sanity_loading(self):
         self.clear_layout()
-        loading_label = QLabel("Running Trait Assessment...\n\nChecking literature availability for your traits.")
+        loading_label = QLabel("Running Paper Availability Check...\n\nChecking literature availability for your traits and species.")
         loading_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(loading_label)
 
-    def show_sanity_results(self, trait_stats):
+    def show_sanity_results(self, trait_stats, species_stats):
         self.clear_layout()
         
         container = QWidget()
         layout = QVBoxLayout(container)
 
         # Header
-        header = QLabel("<h2>Trait Assessment Results</h2>")
+        header = QLabel("<h2>Paper Availability Check Results</h2>")
         header.setAlignment(Qt.AlignCenter)
         layout.addWidget(header)
 
         # Explanation
         explanation = QLabel(
             "The <b>mean</b> indicates typical literature availability.<br>"
-            "The <b>standard deviation</b> (std dev) indicates variability across species."
+            "The <b>standard deviation</b> (SD) indicates variability across species/traits.<br>"
+            "<br>"
+            "If any <b>traits</b> yielded too few papers, consider revising the trait name<br>"
+            "(e.g., use simpler or more common phrasing).<br>"
+            "If any <b>species</b> yielded too few papers, it may be less researched —<br>"
+            "consider whether to include it in your dataset.<br>"
         )
         explanation.setAlignment(Qt.AlignCenter)
         layout.addWidget(explanation)
 
-        # Force window resize to fit content - removed fixed height, use min width
         self.setMinimumWidth(600)
 
-        # Stats Area (Scrollable)
-        scroll_area = QScrollArea()
-        scroll_area.setWidgetResizable(True)
-        scroll_content = QWidget()
-        scroll_layout = QVBoxLayout(scroll_content)
+        def make_scroll_box(stats_dict, label_fn, n_items):
+            """Build a scrollable box of stat labels using label_fn(key, stats) -> str."""
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+            scroll_content = QWidget()
+            scroll_layout = QVBoxLayout(scroll_content)
+            for key, stats in stats_dict.items():
+                lbl = QLabel(label_fn(key, stats))
+                scroll_layout.addWidget(lbl)
+            scroll_layout.addStretch()
+            scroll_area.setWidget(scroll_content)
+            content_height = n_items * 35 + 40
+            scroll_area.setFixedHeight(min(max(content_height, 80), 300))
+            return scroll_area
 
-        for trait, stats in trait_stats.items():
-            mean_val = stats['mean']
-            std_dev_val = stats['std_dev']
-            
-            trait_label = QLabel(
-                f"<b>{trait}</b>: Mean = {mean_val:.1f}, Std Dev = {std_dev_val:.1f}"
-            )
-            scroll_layout.addWidget(trait_label)
-        
-        scroll_layout.addStretch()
-        scroll_area.setWidget(scroll_content)
-        
-        # Adjust height based on content (approx 35px per item + padding)
-        # Cap at 400px, min 100px
-        content_height = len(trait_stats) * 35 + 40
-        scroll_area.setFixedHeight(min(max(content_height, 100), 400))
-        
-        layout.addWidget(scroll_area)
+        # --- Trait Analysis ---
+        trait_header = QLabel("<b>Trait Analysis Results</b>")
+        trait_header.setAlignment(Qt.AlignLeft)
+        layout.addWidget(trait_header)
+
+        trait_box = make_scroll_box(
+            trait_stats,
+            lambda trait, s: f"<b>{trait}</b> yielded a mean of {s['mean']:.1f} papers per species (SD {s['std_dev']:.1f}).",
+            len(trait_stats)
+        )
+        layout.addWidget(trait_box)
+
+        # --- Species Analysis ---
+        species_header = QLabel("<b>Species Analysis Results</b>")
+        species_header.setAlignment(Qt.AlignLeft)
+        layout.addWidget(species_header)
+
+        species_box = make_scroll_box(
+            species_stats,
+            lambda sp, s: f"<b>{sp}</b> yielded a mean of {s['mean']:.1f} papers per trait (SD {s['std_dev']:.1f}).",
+            len(species_stats)
+        )
+        layout.addWidget(species_box)
 
         # Buttons
         btn_layout = QVBoxLayout()
-        
-        proceed_label = QLabel("You can use this information to revise your files or proceed as is.")
-        proceed_label.setAlignment(Qt.AlignCenter)
-        btn_layout.addWidget(proceed_label)
 
         proceed_btn = QPushButton("Proceed with Extraction")
         proceed_btn.clicked.connect(self.run_extraction_pipeline)
@@ -230,8 +301,6 @@ class SpeciesTraitsApp(QWidget):
 
         layout.addLayout(btn_layout)
         self.layout.addWidget(container)
-        
-        # Resize window to fit content
         self.adjustSize()
     
     def run_sanity_check(self):
@@ -241,23 +310,46 @@ class SpeciesTraitsApp(QWidget):
         self.sanity_worker.start()
 
     def on_sanity_check_finished(self, results):
-        self.show_sanity_results(results)
+        trait_stats, species_stats = results
+        self.show_sanity_results(trait_stats, species_stats)
 
     def run_extraction_pipeline(self):
-        # switch to loading
-        self.show_loading()
+        self.show_loading(len(self.species_list))
 
-        # start worker
         self.worker = ExtractionWorker(
-            self.species_list, self.traits_list, 
+            self.species_list, self.traits_list,
             self.trait_descriptions, self.output_file_name
         )
+        self.worker.progress.connect(lambda done, total: self.progress_bar.setValue(done))
         self.worker.finished.connect(self.on_extraction_finished)
         self.worker.start()
 
-    def show_loading(self):
+    def show_loading(self, total_species):
         self.clear_layout()
-        self.layout.addWidget(QLabel("Processing... Please wait."))
+
+        container = QWidget()
+        layout = QVBoxLayout(container)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setSpacing(12)
+
+        title = QLabel("Processing... Please wait.")
+        title.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title)
+
+        desc = QLabel("Progress bar shows the percentage of species fully processed across all traits.")
+        desc.setAlignment(Qt.AlignCenter)
+        desc.setWordWrap(True)
+        layout.addWidget(desc)
+
+        self.progress_bar = TrailingLabelProgressBar()
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(total_species)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setMinimumWidth(400)
+        self.progress_bar.setFixedHeight(28)
+        layout.addWidget(self.progress_bar)
+
+        self.layout.addWidget(container)
 
     def show_success(self, file_name):
         self.clear_layout()

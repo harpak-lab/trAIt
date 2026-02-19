@@ -109,7 +109,7 @@ Return your result in this exact format:
         return f"{trait}: N/A"
 
 
-def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None):
+def process_species_traits(species_list: list, traits_list: list, output_file: str, trait_descriptions: dict = None, progress_callback=None):
     """Main helper method to process species and traits lists through the pipeline."""
 
     start_time = time.time()
@@ -231,8 +231,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             else:
                 results.at[idx, trait] = ""
             
-        # save results
+        # save results after each species
         results.to_csv(output_path, index=False)
+
+        # notify GUI of progress
+        if progress_callback:
+            progress_callback(idx + 1, len(species_list))
 
     print(f"\nResults written to {output_file}")
 
@@ -248,31 +252,38 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
 def sanity_check(species_list: list, traits_list: list):
     import statistics
     trait_stats = {}
+    # species_counts[species] = list of paper counts, one per trait
+    species_counts = {species: [] for species in species_list}
 
     for trait in traits_list:
         print("Checking trait:", trait)
-        counts = []
 
         for species in species_list:
             print("  Species:", species)
             query = f"wild {species} AND {trait}"
             pmcids = search_papers(query, max_results=20)
             count = len(pmcids)
-            counts.append(count)
+            species_counts[species].append(count)
 
+        counts = [species_counts[s][-1] for s in species_list]  # counts for this trait
         if counts:
             mean_count = sum(counts) / len(counts)
-            if len(counts) > 1:
-                std_dev = statistics.stdev(counts)
-            else:
-                std_dev = 0.0
+            std_dev = statistics.stdev(counts) if len(counts) > 1 else 0.0
         else:
             mean_count = 0.0
             std_dev = 0.0
 
-        trait_stats[trait] = {
-            "mean": mean_count,
-            "std_dev": std_dev
-        }
+        trait_stats[trait] = {"mean": mean_count, "std_dev": std_dev}
 
-    return trait_stats
+    # compute per-species stats (average across traits)
+    species_stats = {}
+    for species, counts in species_counts.items():
+        if counts:
+            mean_count = sum(counts) / len(counts)
+            std_dev = statistics.stdev(counts) if len(counts) > 1 else 0.0
+        else:
+            mean_count = 0.0
+            std_dev = 0.0
+        species_stats[species] = {"mean": mean_count, "std_dev": std_dev}
+
+    return trait_stats, species_stats
