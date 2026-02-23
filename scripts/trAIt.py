@@ -236,13 +236,12 @@ class SpeciesTraitsApp(QWidget):
 
         # Explanation
         explanation = QLabel(
-            "The <b>mean</b> indicates typical literature availability.<br>"
-            "The <b>standard deviation</b> (SD) indicates variability across species/traits.<br>"
-            "<br>"
             "If any <b>traits</b> yielded too few papers, consider revising the trait name<br>"
             "(e.g., use simpler or more common phrasing).<br>"
             "If any <b>species</b> yielded too few papers, it may be less researched —<br>"
-            "consider whether to include it in your dataset.<br>"
+            "consider whether to include it in your dataset.<br><br>"
+            "<i>Showing the 10 lowest results below. Full results saved to <br>"
+            "<b>results/literature_availability_results.txt</b>.</i>"
         )
         explanation.setAlignment(Qt.AlignCenter)
         layout.addWidget(explanation)
@@ -265,26 +264,28 @@ class SpeciesTraitsApp(QWidget):
             return scroll_area
 
         # --- Trait Analysis ---
-        trait_header = QLabel("<b>Trait Analysis Results</b>")
+        trait_header = QLabel("<b>Sources Found Per Trait</b>")
         trait_header.setAlignment(Qt.AlignLeft)
         layout.addWidget(trait_header)
 
+        sorted_traits = dict(sorted(trait_stats.items(), key=lambda x: x[1]['mean'])[:10])
         trait_box = make_scroll_box(
-            trait_stats,
-            lambda trait, s: f"<b>{trait}</b> yielded a mean of {s['mean']:.1f} papers per species (SD {s['std_dev']:.1f}).",
-            len(trait_stats)
+            sorted_traits,
+            lambda trait, s: f"<b>{trait}</b>: {s['mean']:.1f} +- {s['std_dev']:.1f} papers",
+            len(sorted_traits)
         )
         layout.addWidget(trait_box)
 
         # --- Species Analysis ---
-        species_header = QLabel("<b>Species Analysis Results</b>")
+        species_header = QLabel("<b>Sources Found Per Species</b>")
         species_header.setAlignment(Qt.AlignLeft)
         layout.addWidget(species_header)
 
+        sorted_species = dict(sorted(species_stats.items(), key=lambda x: x[1]['mean'])[:10])
         species_box = make_scroll_box(
-            species_stats,
-            lambda sp, s: f"<b>{sp}</b> yielded a mean of {s['mean']:.1f} papers per trait (SD {s['std_dev']:.1f}).",
-            len(species_stats)
+            sorted_species,
+            lambda sp, s: f"<b>{sp}</b>: {s['mean']:.1f} +- {s['std_dev']:.1f} papers",
+            len(sorted_species)
         )
         layout.addWidget(species_box)
 

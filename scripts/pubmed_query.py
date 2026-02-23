@@ -285,5 +285,17 @@ def sanity_check(species_list: list, traits_list: list):
             mean_count = 0.0
             std_dev = 0.0
         species_stats[species] = {"mean": mean_count, "std_dev": std_dev}
+    
+    # Write full results to log file
+    results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
+    os.makedirs(results_dir, exist_ok=True)
+    log_path = os.path.join(results_dir, "literature_availability_results.txt")
+    with open(log_path, "w") as f:
+        f.write("Sources Found Per Trait:\n")
+        for trait, stats in trait_stats.items():
+            f.write(f"{trait}: {stats['mean']:.1f} +- {stats['std_dev']:.1f} papers\n")
+        f.write("\nSources Found Per Species:\n")
+        for species, stats in species_stats.items():
+            f.write(f"{species}: {stats['mean']:.1f} +- {stats['std_dev']:.1f} papers\n")
 
     return trait_stats, species_stats
