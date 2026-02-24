@@ -1,0 +1,7 @@
+Sources Found Per Trait:
+Body Mass: 8.0 +- 1.4 papers
+Brain Mass: 2.0 +- 1.4 papers
+
+Sources Found Per Species:
+Charadrius mongolus: 5.0 +- 5.7 papers
+Streptopelia capicola: 5.0 +- 2.8 papers

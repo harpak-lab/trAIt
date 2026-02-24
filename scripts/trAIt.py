@@ -240,6 +240,8 @@ class SpeciesTraitsApp(QWidget):
             "(e.g., use simpler or more common phrasing).<br>"
             "If any <b>species</b> yielded too few papers, it may be less researched —<br>"
             "consider whether to include it in your dataset.<br><br>"
+            'To make these changes, click "Quit" and edit your files, then restart the application. <br>'
+            'If you would like to continue with the current files, click "Proceed with Extraction".<br><br>'
             "<i>Showing the 10 lowest results below. Full results saved to <br>"
             "<b>results/literature_availability_results.txt</b>.</i>"
         )
