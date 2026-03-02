@@ -54,7 +54,6 @@ def numeric_correct(true, pred, col):
     if np.isnan(true_val) or np.isnan(pred_val):
         return np.nan
 
-    # FIXED: compute SD only after parsing numeric values
     sd = answer[col].apply(parse_numeric).std()
 
     if pd.isna(sd) or sd == 0:

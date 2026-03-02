@@ -48,6 +48,18 @@ def is_complete(pred_val):
     text = str(pred_val).strip().lower()
     return text not in ["nan", "", "n/a", "unknown"]
 
+def _norm(s):
+    """Normalize integer-formatted floats: '1.0' → '1', '0.0' → '0'.
+    Handles pandas dtype mismatch where the answer key reads Egg Style as
+    object/int ('0','1') but the pred CSV (with NaN cells) reads as float64."""
+    try:
+        f = float(s)
+        if f == int(f):
+            return str(int(f))
+    except (ValueError, OverflowError):
+        pass
+    return s
+
 def categorical_correct(true, pred):
     true = str(true).strip().lower()
     pred = str(pred).strip().lower()
@@ -55,7 +67,7 @@ def categorical_correct(true, pred):
     if true in ["nan", "", "n/a"] or pred in ["nan", "", "n/a"]:
         return np.nan
 
-    return int(true == pred)
+    return int(_norm(true) == _norm(pred))
 
 def numeric_correct(true, pred, trait):
     true_val = parse_numeric(true)
