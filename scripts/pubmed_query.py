@@ -138,6 +138,9 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
     for trait in traits_list:
         results[trait] = results[trait].astype(str)
 
+    total_steps = len(species_list) * len(traits_list)
+    steps_done = 0
+
     # loop through each species and trait
     for idx, row in df.iterrows():
         species = row["Species"]
@@ -230,13 +233,12 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 results.at[idx, trait] = final_value
             else:
                 results.at[idx, trait] = ""
-            
-        # save results after each species
-        results.to_csv(output_path, index=False)
 
-        # notify GUI of progress
-        if progress_callback:
-            progress_callback(idx + 1, len(species_list))
+            # save results and notify GUI after each trait
+            results.to_csv(output_path, index=False)
+            steps_done += 1
+            if progress_callback:
+                progress_callback(steps_done, total_steps)
 
     print(f"\nResults written to {output_file}")
 

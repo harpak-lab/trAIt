@@ -31,7 +31,7 @@ class SanityCheckWorker(QThread):
 # Worker thread
 class ExtractionWorker(QThread):
     finished = pyqtSignal(str)
-    progress = pyqtSignal(int, int)  # (species_done, species_total)
+    progress = pyqtSignal(int, int)  # (traits_done, total_trait_steps)
 
     def __init__(self, species_list, traits_list, trait_descriptions, file_name):
         super().__init__()
@@ -317,7 +317,7 @@ class SpeciesTraitsApp(QWidget):
         self.show_sanity_results(trait_stats, species_stats)
 
     def run_extraction_pipeline(self):
-        self.show_loading(len(self.species_list))
+        self.show_loading(len(self.species_list), len(self.traits_list))
 
         self.worker = ExtractionWorker(
             self.species_list, self.traits_list,
@@ -327,7 +327,7 @@ class SpeciesTraitsApp(QWidget):
         self.worker.finished.connect(self.on_extraction_finished)
         self.worker.start()
 
-    def show_loading(self, total_species):
+    def show_loading(self, total_species, total_traits):
         self.clear_layout()
 
         container = QWidget()
@@ -339,14 +339,14 @@ class SpeciesTraitsApp(QWidget):
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
-        desc = QLabel("Progress bar shows the percentage of species fully processed across all traits.")
+        desc = QLabel("Progress bar shows the percentage of traits processed across all species.")
         desc.setAlignment(Qt.AlignCenter)
         desc.setWordWrap(True)
         layout.addWidget(desc)
 
         self.progress_bar = TrailingLabelProgressBar()
         self.progress_bar.setMinimum(0)
-        self.progress_bar.setMaximum(total_species)
+        self.progress_bar.setMaximum(total_species * total_traits)
         self.progress_bar.setValue(0)
         self.progress_bar.setMinimumWidth(400)
         self.progress_bar.setFixedHeight(28)
