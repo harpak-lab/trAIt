@@ -1,266 +1,120 @@
 import pandas as pd
-import re
 import numpy as np
+import re
 
-'''
-# STEP 1: CLEAN UP FROG ANSWER KEY
-df = pd.read_excel("sample_data/frog_answer_key.xlsx")
+ANSWER_KEY = "sample_data/frog_answer_key.csv"
+MODEL_OUTPUT = "results/frog_output_results.csv"
 
-rename_map = {
-    "Name": "Species",
-    "SVL Male (mm)": "SVL Male",
-    "SVL Female (mm)": "SVL Female",
-    "Avg SVL Adult (mm)": "Average SVL Adult",
-    "Mean Temperature": "Average Temperature",
-    "Mean Rainfall": "Average Rainfall",
-}
-df = df.rename(columns=rename_map)
-
-cols_to_drop = [
-    "+/- SVL Male (mm)", "+/- SVL Female (mm)", "+/- SVL Adult (mm)",
-    "+/- Egg Diameter (mm)", "Avg Egg Diameter (mm)", 
-    "Std. Dev. Temperature", "Std. Dev. Rainfall",
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"
+NUMERIC_TRAITS = [
+    "SVL Male",
+    "SVL Female",
+    "Average SVL Adult",
+    "Egg Clutch",
+    "Average Temperature",
+    "Average Rainfall",
+    "Average Altitude"
 ]
-df = df.drop(columns=[c for c in cols_to_drop if c in df.columns], errors="ignore")
 
-df = df.head(200)
-
-df.to_csv("sample_data/new_frog_answer_key.csv", index=False)
-'''
-
-'''
-# STEP 2: CLEAN UP FROG OUTPUT RESULTS
-df = pd.read_csv("results/frog_output_results.csv")
-
-cols_to_drop = [
-    "Average Hatch Time",
-    "Average Development Time",
-    "Average Time of Day",
-    "Average Age at Maturity"
+CATEGORICAL_TRAITS = [
+    "Egg Style"
 ]
-df = df.drop(columns=[c for c in cols_to_drop if c in df.columns], errors="ignore")
 
-cols_to_clean = [c for c in df.columns if c not in ["Species", "Egg Style"]]
-def extract_number(value):
+Z_THRESHOLD = 1.5
+
+ans = pd.read_csv(ANSWER_KEY)
+pred = pd.read_csv(MODEL_OUTPUT)
+
+ans.columns = ans.columns.str.strip()
+pred.columns = pred.columns.str.strip()
+
+df = ans.merge(pred, on="Species", how="inner", suffixes=("_true", "_pred"))
+
+def parse_numeric(value):
     if pd.isna(value):
-        return value
-    if isinstance(value, (int, float)):
-        return value
-    value = str(value)
-    # Find number pattern, e.g. 12, 12.5, 0.87
-    match = re.search(r"-?\d+\.?\d*", value)
-    if match:
-        num = match.group()
-        # convert automatically: if integer-like, make int; else float
-        return float(num) if "." in num else int(num)
-    return value
-for col in cols_to_clean:
-    df[col] = df[col].apply(extract_number)
-
-# Egg Style aquatic 0, terrestrial 1
-def encode_egg_style(value):
-    if pd.isna(value) or str(value).strip() == "":
-        return ""
-    v = str(value).strip().lower()
-    if v == "aquatic":
-        return 0
-    if v == "terrestrial":
-        return 1
-    return value # shouldn't get here
-
-if "Egg Style" in df.columns:
-    df["Egg Style"] = df["Egg Style"].apply(encode_egg_style)
-
-df.to_csv("results/new_frog_output_results.csv", index=False)
-'''
-
-# STEP 3: ACTUAL COMPARISON
-
-def to_float(x):
-    """Extract numeric value from any string; return np.nan if none."""
-    if pd.isna(x):
         return np.nan
-    s = str(x).strip()
 
-    # find integer or float
-    m = re.search(r"-?\d+\.?\d*", s)
-    if m:
-        num = m.group()
-        return float(num)
-    return np.nan
+    text = str(value)
 
-key = pd.read_csv("sample_data/new_frog_answer_key.csv")
-out = pd.read_csv("results/new_frog_output_results.csv")
+    # Extract all numbers
+    nums = re.findall(r"[-+]?\d*\.\d+|\d+", text)
+    if not nums:
+        return np.nan
 
-numeric_cols_key = [
-    "SVL Male","SVL Female","Average SVL Adult",
-    "Min Egg Clutch","Max Egg Clutch",
-    "Min Temperature","Max Temperature","Average Temperature",
-    "Min Rainfall","Max Rainfall","Average Rainfall",
-    "Min Altitude","Max Altitude"
-]
+    nums = [float(n) for n in nums]
+    return np.mean(nums)
 
-numeric_cols_out = [
-    "SVL Male","SVL Female","Average SVL Adult",
-    "Egg Clutch","Average Temperature",
-    "Average Rainfall","Average Altitude"
-]
+def is_complete(pred_val):
+    """A prediction counts as complete if the model returned a non-empty, non-NA answer."""
+    text = str(pred_val).strip().lower()
+    return text not in ["nan", "", "n/a", "unknown"]
 
-# Convert all numeric columns in both spreadsheets
-for col in numeric_cols_key:
-    key[col] = key[col].apply(to_float)
+def categorical_correct(true, pred):
+    true = str(true).strip().lower()
+    pred = str(pred).strip().lower()
 
-for col in numeric_cols_out:
-    out[col] = out[col].apply(to_float)
+    if true in ["nan", "", "n/a"] or pred in ["nan", "", "n/a"]:
+        return np.nan
 
-comparison = pd.DataFrame()
-comparison["Species"] = out["Species"]
+    return int(true == pred)
 
-def format_diff(correct, predicted):
-    """Return (+X) or (-X) depending on difference."""
-    try:
-        diff = correct - predicted
-    except:
-        print(f"Error computing difference: correct={correct}, predicted={predicted}")
-    if diff > 0:
-        return f"(+{diff})"
-    else:
-        return f"({diff})"  # negative already has "-"
+def numeric_correct(true, pred, trait):
+    true_val = parse_numeric(true)
+    pred_val = parse_numeric(pred)
 
-def safe_val(x):
-    """Return np.nan if value is missing or empty string."""
-    if pd.isna(x): return np.nan
-    s = str(x).strip()
-    if s == "": return np.nan
-    return x
+    if np.isnan(true_val) or np.isnan(pred_val):
+        return np.nan
 
+    sd = ans[trait].apply(parse_numeric).std()
 
-# 1. Direct comparison numeric (SVL Male / SVL Female / Average SVL Adult)
-for col in ["SVL Male", "SVL Female", "Average SVL Adult"]:
-    result_vals = []
-    for i in range(len(out)):
-        correct = safe_val(key.loc[i, col])
-        predicted = safe_val(out.loc[i, col])
+    if pd.isna(sd) or sd == 0:
+        return np.nan
 
-        if pd.isna(correct) or pd.isna(predicted):
-            result_vals.append("")    # blank if either missing
-        elif correct == predicted:
-            result_vals.append(predicted)
+    z = abs(pred_val - true_val) / sd
+    return int(z <= Z_THRESHOLD)
+
+common_traits = []
+for trait in NUMERIC_TRAITS + CATEGORICAL_TRAITS:
+    if f"{trait}_true" in df.columns and f"{trait}_pred" in df.columns:
+        common_traits.append(trait)
+
+rows = []
+
+for _, row in df.iterrows():
+    species = row["Species"]
+
+    for trait in common_traits:
+        true_val = row[f"{trait}_true"]
+        pred_val = row[f"{trait}_pred"]
+
+        if trait in NUMERIC_TRAITS:
+            correct = numeric_correct(true_val, pred_val, trait)
         else:
-            result_vals.append(format_diff(correct, predicted))
-    comparison[col] = result_vals
+            correct = categorical_correct(true_val, pred_val)
 
-# 2. Egg Style (discrete)
-egg_style_vals = []
-for i in range(len(out)):
-    correct = safe_val(key.loc[i, "Egg Style"])
-    predicted = safe_val(out.loc[i, "Egg Style"])
-    # blank if either is missing
-    if pd.isna(correct) or pd.isna(predicted):
-        egg_style_vals.append("")
-        continue
-    # convert both to int (so 1 and 1.0 become identical)
-    try:
-        correct_int = int(correct)
-        predicted_int = int(predicted)
-    except:
-        egg_style_vals.append("invalid")
-        continue
-    # now compare
-    if correct_int == predicted_int:
-        egg_style_vals.append(correct_int)   # or predicted_int, same now
-    else:
-        egg_style_vals.append("invalid")
-comparison["Egg Style"] = egg_style_vals
+        rows.append({
+            "Species": species,
+            "Trait": trait,
+            "True": true_val,
+            "Pred": pred_val,
+            "Correct": correct,
+            "Complete": int(is_complete(pred_val))
+        })
 
-# 3. Egg Clutch — check if inside min/max range
-egg_clutch_vals = []
-for i in range(len(out)):
-    predicted = safe_val(out.loc[i, "Egg Clutch"])
-    min_val = safe_val(key.loc[i, "Min Egg Clutch"])
-    max_val = safe_val(key.loc[i, "Max Egg Clutch"])
-    if pd.isna(predicted) or pd.isna(min_val) or pd.isna(max_val):
-        egg_clutch_vals.append("")
-        continue
-    if min_val <= predicted <= max_val:
-        egg_clutch_vals.append(predicted)
-    else:
-        # compute distance from nearest boundary
-        if predicted < min_val:
-            diff = min_val - predicted
-            egg_clutch_vals.append(f"(-{diff})")
-        else:
-            diff = predicted - max_val
-            egg_clutch_vals.append(f"(+{diff})")
-comparison["Egg Clutch"] = egg_clutch_vals
+results_df = pd.DataFrame(rows)
 
-# 4. Average Altitude — compare to Min/Max Altitude
-avg_alt_vals = []
-for i in range(len(out)):
-    predicted = safe_val(out.loc[i, "Average Altitude"])
-    min_val = safe_val(key.loc[i, "Min Altitude"])
-    max_val = safe_val(key.loc[i, "Max Altitude"])
-    if pd.isna(predicted) or pd.isna(min_val) or pd.isna(max_val):
-        avg_alt_vals.append("")
-        continue
-    if min_val <= predicted <= max_val:
-        avg_alt_vals.append(predicted)
-    else:
-        if predicted < min_val:
-            diff = min_val - predicted
-            avg_alt_vals.append(f"(-{diff})")
-        else:
-            diff = predicted - max_val
-            avg_alt_vals.append(f"(+{diff})")
-comparison["Average Altitude"] = avg_alt_vals
+dataset_accuracy     = results_df["Correct"].mean()
+species_accuracy     = results_df.groupby("Species")["Correct"].mean()
+trait_accuracy       = results_df.groupby("Trait")["Correct"].mean()
 
-# 5. Average Temperature — hybrid logic
-avg_temp_vals = []
-for i in range(len(out)):
-    predicted = safe_val(out.loc[i, "Average Temperature"])
-    correct_avg = safe_val(key.loc[i, "Average Temperature"])
-    min_val = safe_val(key.loc[i, "Min Temperature"])
-    max_val = safe_val(key.loc[i, "Max Temperature"])
-    if pd.isna(predicted) or pd.isna(correct_avg):
-        avg_temp_vals.append("")
-        continue
-    if predicted == correct_avg:
-        avg_temp_vals.append(predicted)
-    else:
-        if min_val <= predicted <= max_val:
-            avg_temp_vals.append(predicted)
-        else:
-            if predicted < min_val:
-                diff = min_val - predicted
-                avg_temp_vals.append(f"(-{diff})")
-            else:
-                diff = predicted - max_val
-                avg_temp_vals.append(f"(+{diff})")
-comparison["Average Temperature"] = avg_temp_vals
+dataset_completeness = results_df["Complete"].mean()
+trait_completeness   = results_df.groupby("Trait")["Complete"].mean()
 
-# 6. Average Rainfall — same hybrid logic as temperature
-avg_rain_vals = []
-for i in range(len(out)):
-    predicted = safe_val(out.loc[i, "Average Rainfall"])
-    correct_avg = safe_val(key.loc[i, "Average Rainfall"])
-    min_val = safe_val(key.loc[i, "Min Rainfall"])
-    max_val = safe_val(key.loc[i, "Max Rainfall"])
-    if pd.isna(predicted) or pd.isna(correct_avg):
-        avg_rain_vals.append("")
-        continue
-    if predicted == correct_avg:
-        avg_rain_vals.append(predicted)
-    else:
-        if min_val <= predicted <= max_val:
-            avg_rain_vals.append(predicted)
-        else:
-            if predicted < min_val:
-                diff = min_val - predicted
-                avg_rain_vals.append(f"(-{diff})")
-            else:
-                diff = predicted - max_val
-                avg_rain_vals.append(f"(+{diff})")
-comparison["Average Rainfall"] = avg_rain_vals
+print("\n=== FROG DATASET ACCURACY ===")
+print(f"Dataset-wide accuracy:     {dataset_accuracy:.3f}")
+print(f"Dataset-wide completeness: {dataset_completeness:.3f}\n")
 
-comparison.to_csv("results/frog_comparison_results.csv", index=False)
+print("=== Trait-specific accuracy ===")
+print(trait_accuracy, "\n")
+
+print("=== Trait-specific completeness ===")
+print(trait_completeness, "\n")

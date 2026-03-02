@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import re
 
-ANSWER_KEY_PATH = "sample_data/bird_answer_key_new.csv"
+ANSWER_KEY_PATH = "sample_data/bird_answer_key.csv"
 MODEL_OUTPUT_PATH = "results/bird_output_results.csv"
 
 NUMERIC_TRAITS = [
@@ -32,6 +32,11 @@ def parse_numeric(value):
         return np.nan
     nums = [float(n) for n in nums]
     return np.mean(nums)
+
+def is_complete(pred_val):
+    """A prediction counts as complete if the model returned a non-empty, non-NA answer."""
+    text = str(pred_val).strip().lower()
+    return text not in ["nan", "", "n/a", "unknown"]
 
 def categorical_correct(true, pred):
     true = str(true).strip().lower()
@@ -79,26 +84,25 @@ for _, row in df.iterrows():
         results.append({
             "Species": species,
             "Trait": trait,
-            "Correct": correct
+            "Correct": correct,
+            "Complete": int(is_complete(pred_val))
         })
 
 results_df = pd.DataFrame(results)
 
-dataset_accuracy = results_df["Correct"].mean()
-species_accuracy = results_df.groupby("Species")["Correct"].mean()
-trait_accuracy = results_df.groupby("Trait")["Correct"].mean()
+dataset_accuracy    = results_df["Correct"].mean()
+species_accuracy    = results_df.groupby("Species")["Correct"].mean()
+trait_accuracy      = results_df.groupby("Trait")["Correct"].mean()
 
-avg_species_accuracy = species_accuracy.mean()
-avg_trait_accuracy = trait_accuracy.mean()
-
-print(f"Average species-wide accuracy: {avg_species_accuracy:.3f}")
-print(f"Average trait-wide accuracy: {avg_trait_accuracy:.3f}\n")
+dataset_completeness = results_df["Complete"].mean()
+trait_completeness   = results_df.groupby("Trait")["Complete"].mean()
 
 print("\n=== BIRD DATASET ACCURACY ===")
-print(f"Dataset-wide accuracy: {dataset_accuracy:.3f}\n")
-
-print("=== Species-specific accuracy ===")
-print(species_accuracy, "\n")
+print(f"Dataset-wide accuracy:     {dataset_accuracy:.3f}")
+print(f"Dataset-wide completeness: {dataset_completeness:.3f}\n")
 
 print("=== Trait-specific accuracy ===")
 print(trait_accuracy, "\n")
+
+print("=== Trait-specific completeness ===")
+print(trait_completeness, "\n")
