@@ -10,13 +10,12 @@ from utils import get_iucn_assessment, search_papers, fetch_pdf, parse_llm_outpu
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Configuration
+# configuration
 LLM_MODEL = os.getenv("LLM_MODEL", "gpt-5-nano")
-
 
 def extract_trait_from_paper(species: str, trait: str, paper_text: str, trait_desc: str = ""):
     """Ask LLM to extract a single trait from a single paper."""
-    # Use generic encoding to avoid crashing on unknown model names from other providers
+    # use generic encoding to avoid crashing on unknown model names from other providers
     encoding = tiktoken.get_encoding("cl100k_base") 
     tokens = encoding.encode(paper_text)
     max_allowed_tokens = 120000
@@ -71,7 +70,7 @@ def summarize_answers_with_llm(species: str, trait: str, answers: list):
     if not answers:
         return f"{trait}: N/A"
 
-    # Build summary prompt
+    # build summary prompt
     answers_text = "\n".join(f"- {a}" for a in answers)
     prompt = f"""
 You are a biology research assistant summarizing extracted values from multiple papers.
@@ -202,7 +201,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
             answers = []  # store up to 3 valid extracted answers
 
             for paper_idx, pmcid in enumerate(pmcids[:20]):  # check up to 20 papers
-                # print(f"    Trying paper {paper_idx + 1}/{min(20, len(pmcids))} for {trait}")
                 paper_text = fetch_pdf(pmcid)
                 if not paper_text:
                     continue
@@ -214,7 +212,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
                 try:
                     llm_output = extract_trait_from_paper(species, trait, paper_text, trait_desc)
                     value = parse_llm_output(llm_output, trait)
-                    # print(f"      Extracted value from paper {paper_idx + 1}: {value}")
 
                     if value not in ("N/A", "[N/A]", ""):
                         # log successful papers (where LLM extracted a valid answer)
@@ -254,7 +251,6 @@ def process_species_traits(species_list: list, traits_list: list, output_file: s
 def sanity_check(species_list: list, traits_list: list):
     import statistics
     trait_stats = {}
-    # species_counts[species] = list of paper counts, one per trait
     species_counts = {species: [] for species in species_list}
 
     for trait in traits_list:
@@ -288,7 +284,7 @@ def sanity_check(species_list: list, traits_list: list):
             std_dev = 0.0
         species_stats[species] = {"mean": mean_count, "std_dev": std_dev}
     
-    # Write full results to log file
+    # write full results to log file
     results_dir = os.path.join(os.path.dirname(__file__), "..", "results")
     os.makedirs(results_dir, exist_ok=True)
     log_path = os.path.join(results_dir, "literature_availability_results.txt")

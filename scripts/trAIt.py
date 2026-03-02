@@ -14,9 +14,8 @@ from PyQt5.QtWidgets import QStyleOptionProgressBar, QStyle
 from pubmed_query import process_species_traits, sanity_check
 
 
-# Worker thread for Sanity Check
 class SanityCheckWorker(QThread):
-    finished = pyqtSignal(object)  # emits (trait_stats, species_stats) tuple
+    finished = pyqtSignal(object)
 
     def __init__(self, species_list, traits_list):
         super().__init__()
@@ -28,10 +27,9 @@ class SanityCheckWorker(QThread):
         self.finished.emit(results)
 
 
-# Worker thread
 class ExtractionWorker(QThread):
     finished = pyqtSignal(str)
-    progress = pyqtSignal(int, int)  # (traits_done, total_trait_steps)
+    progress = pyqtSignal(int, int)
 
     def __init__(self, species_list, traits_list, trait_descriptions, file_name):
         super().__init__()
@@ -52,18 +50,16 @@ class ExtractionWorker(QThread):
 class TrailingLabelProgressBar(QProgressBar):
     """Progress bar with the % label floating above the fill edge."""
 
-    LABEL_AREA = 22  # pixels above the bar reserved for the text
+    LABEL_AREA = 22
 
     def paintEvent(self, event):
-        # Draw the standard bar (chunk + background) but suppress built-in text
         opt = QStyleOptionProgressBar()
         self.initStyleOption(opt)
-        opt.text = ""           # hide default centered text
+        opt.text = ""
         opt.textVisible = False
         painter = QPainter(self)
         self.style().drawControl(QStyle.CE_ProgressBar, opt, painter, self)
 
-        # Calculate fill width
         total = self.maximum() - self.minimum()
         if total <= 0:
             return
@@ -78,17 +74,14 @@ class TrailingLabelProgressBar(QProgressBar):
         text_h = fm.height()
         margin = 6
 
-        # Place text just inside the right edge of the filled area
-        # If fill is too narrow to fit, place it just to the right of the fill
         x = max(fill_w - text_w - margin, fill_w + margin)
         if fill_w - text_w - margin >= margin:
-            x = fill_w - text_w - margin  # inside the fill
+            x = fill_w - text_w - margin
         else:
-            x = fill_w + margin            # outside the fill (unfilled region)
+            x = fill_w + margin
 
         y = (self.height() + text_h) // 2 - fm.descent()
 
-        # Pick contrasting color
         if x < fill_w:
             painter.setPen(QColor("white"))
         else:
@@ -104,25 +97,20 @@ class SpeciesTraitsApp(QWidget):
         self.setWindowTitle("Species & Traits Analysis")
         self.setGeometry(200, 200, 600, 500)
 
-        # file paths
         self.species_path = None
         self.traits_path = None
         
-        # stored data for pipeline
         self.species_list = []
         self.traits_list = []
         self.trait_descriptions = {}
         self.output_file_name = "output_results.csv"
 
-        # layout
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
-        # tab widget
         self.tabs = QTabWidget()
         self.layout.addWidget(self.tabs)
 
-        # create tabs
         self.instructions_tab = QWidget()
         self.examples_tab = QWidget()
         self.upload_tab = QWidget()
@@ -131,7 +119,6 @@ class SpeciesTraitsApp(QWidget):
         self.tabs.addTab(self.examples_tab, "Examples")
         self.tabs.addTab(self.upload_tab, "Upload")
 
-        # populate tabs
         self.show_instructions_tab()
         self.show_examples_tab()
         self.show_input_form()
@@ -200,7 +187,6 @@ class SpeciesTraitsApp(QWidget):
             layout.addWidget(label)
 
             image_label = QLabel()
-            # Construct absolute path relative to this script file
             script_dir = os.path.dirname(os.path.abspath(__file__))
             image_path = os.path.join(script_dir, "..", "sample_data", f"{filename}.png")
             pixmap = QPixmap(image_path)
@@ -210,7 +196,6 @@ class SpeciesTraitsApp(QWidget):
             image_label.setAlignment(Qt.AlignHCenter)
             layout.addWidget(image_label)
 
-        # Add all examples
         add_example("Example CSV Format", "example_species_csv")
         add_example("Example Excel Format", "example_species_excel")
         add_example("Example Trait Description File", "example_trait_desc")
@@ -229,12 +214,9 @@ class SpeciesTraitsApp(QWidget):
         container = QWidget()
         layout = QVBoxLayout(container)
 
-        # Header
         header = QLabel("<h2>Literature Availability Results</h2>")
         header.setAlignment(Qt.AlignCenter)
         layout.addWidget(header)
-
-        # Explanation
         explanation = QLabel(
             "If any <b>traits</b> yielded too few papers, consider revising the trait name<br>"
             "(e.g., use simpler or more common phrasing).<br>"
@@ -265,7 +247,6 @@ class SpeciesTraitsApp(QWidget):
             scroll_area.setFixedHeight(min(max(content_height, 80), 300))
             return scroll_area
 
-        # --- Trait Analysis ---
         trait_header = QLabel("<b>Sources Found Per Trait</b>")
         trait_header.setAlignment(Qt.AlignLeft)
         layout.addWidget(trait_header)
@@ -278,7 +259,6 @@ class SpeciesTraitsApp(QWidget):
         )
         layout.addWidget(trait_box)
 
-        # --- Species Analysis ---
         species_header = QLabel("<b>Sources Found Per Species</b>")
         species_header.setAlignment(Qt.AlignLeft)
         layout.addWidget(species_header)
@@ -291,7 +271,6 @@ class SpeciesTraitsApp(QWidget):
         )
         layout.addWidget(species_box)
 
-        # Buttons
         btn_layout = QVBoxLayout()
 
         proceed_btn = QPushButton("Proceed with Extraction")
@@ -414,12 +393,10 @@ class SpeciesTraitsApp(QWidget):
         self.species_list = species_list
         self.output_file_name = "output_results.csv"
 
-        # Start Sanity Check
         self.run_sanity_check()
 
     def on_extraction_finished(self, file_name):
         self.show_success(file_name)
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
