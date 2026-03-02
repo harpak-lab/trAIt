@@ -37,19 +37,26 @@ def main():
     print("-" * 60)
 
     # Calculate completeness for each column
+    trait_completeness = []
     for col in df.columns:
         # Skip the identifier column 'Species' usually, but user said "for each trait"
         # We'll assume everything else is a trait.
         if col.lower() == "species":
             continue
-            
+
         # Count non-NaN values
         non_blank_count = df[col].count()
-        
+
         # Calculate proportion
         proportion = non_blank_count / total_species
-        
+        trait_completeness.append(proportion)
+
         print(f"{col:<35} | {non_blank_count:<5} | {proportion:.5f}")
+
+    if trait_completeness:
+        overall = sum(trait_completeness) / len(trait_completeness)
+        print("-" * 60)
+        print(f"{'Overall Average':<35} |       | {overall:.5f}")
 
 if __name__ == "__main__":
     main()
